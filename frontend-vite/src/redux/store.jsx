@@ -5,40 +5,53 @@ import {pokemonApi} from "./apicall/auth";
 import { combineReducers } from "@reduxjs/toolkit";
 
 import storage from "redux-persist/lib/storage"
-import {persistReducer,persistStore} from "redux-persist"
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER} from "redux-persist"
 
-// add here to persist data
+// add here to persist data [ do not add RTKquery ]
 const reducers = combineReducers({
   Theme: themeReducer,
-})
-// timepass checking addtional reducers
-const  myreducer = combineReducers({
-  love:reducers,
 })
 
 
 const persistConfig = {
-  key:'persist-store',
+  key:'root',
+  version: 1,
   storage,
-  blacklist:[''] // we can blacklist any of the reducers
 }
+// blacklist:[''] // we can blacklist any of the reducers
 const persistedReducer = persistReducer(persistConfig,reducers)
 
 
 
-
 const Store = configureStore({
-  reducer: {
-    [pokemonApi.reducerPath] : pokemonApi.reducer,
+  reducer:{
+    persistState :persistedReducer,
+    pokemonApi : pokemonApi.reducer,
     userReducer: userReducer,
-    Theme:persistedReducer,
-    Love:myreducer,
   },
-
-
-
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(pokemonApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(pokemonApi.middleware),
 });
 
 export default Store;
+
+
+
+/*
+NOte -> do not persiste any RTKQuery api calls
+
+create separeate reducers and includes them separately apart from redux-persist
+
+and those which needs persistence, such ass theme and all can be done over there in redux-persist.
+*/

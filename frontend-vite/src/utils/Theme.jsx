@@ -1,12 +1,15 @@
 
 export const darkTheme = {
-    primary:"",
-    secondar:"",
+    primary:"orange",
+    secondary:"black",
     button:"",
     bgColor:"",
     bgNav:"",
-    
 
+    isSmMobile: "520px",
+    isLgMobile: "768px",
+    isTablet: "1024px",
+    isDesktop: "1920px",
 }
 export const lightTheme = {
     primary:"",
@@ -14,4 +17,5 @@ export const lightTheme = {
     button:"",
     bgColor:"",
     bgNav:"",
+
 }

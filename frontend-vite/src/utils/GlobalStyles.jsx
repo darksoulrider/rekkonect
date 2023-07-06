@@ -10,6 +10,9 @@ export const screenSize = {
 
 
 const GlobalStyles = createGlobalStyle`
+
+   
+
     *{
         margin:0px;
         padding: 0px;
@@ -19,17 +22,21 @@ const GlobalStyles = createGlobalStyle`
         font-size: 65.5%;
     }
     body{
-        font-family: 'Roboto', sans-serif;
+        /* font-family: 'Roboto', sans-serif; */
+        font-family: 'Poppins', sans-serif;
+        /* font-family:  'sans-serif'; */
+        
         max-width: 100%;
         max-height: 100%;
         /* overflow-x: hidden; */
+        background-color: white;
     }
     input{
-        font-size: 1.7rem;
+        font-size: 1.6rem;
         border-radius: 0.8rem;
         border-style: none;
         outline: none;
-        height: 4.3rem;
+        height: 4.2rem;
         min-width: 29rem;
         padding: 1.2rem;
         /* filter: drop-shadow(0.01rem 0.01rem 0.1rem black); */
@@ -39,6 +46,15 @@ const GlobalStyles = createGlobalStyle`
     }
     p{
 
+    }
+    button{
+        cursor : pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        margin: 2rem 0;
+        transition : 500ms;
+        outline: none;
+        border-style: none;
     }
 
 `
