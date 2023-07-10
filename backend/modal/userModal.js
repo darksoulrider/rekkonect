@@ -7,6 +7,7 @@ const userRoles = ["candidate", "mentor", "employer"];
 
 const userSchema = new mongoose.Schema(
   {
+    // make addresss compulsory and organisation name for EMPLOYER
     firstname: {
       type: String,
       required: [true, "First name required"],
@@ -22,7 +23,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: [true, "Email address required"],
-      validate: [Validator.isEmail, "Email address is not valid"],
+      validate: [validator.isEmail, "Email address is not valid"],
       unique: [true, "Email address must be unique"],
     },
     password: {
