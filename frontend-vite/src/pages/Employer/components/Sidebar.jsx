@@ -5,7 +5,7 @@ import { RiUserSettingsFill } from 'react-icons/ri';
 import { NavLink, useNavigation } from 'react-router-dom';
 import {BsArrowLeftCircleFill} from "react-icons/bs";
 import Logo from "/assets/images/logo.png";
-import { styled } from 'styled-components';
+import { styled,StyleSheetManager  } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { Tooltip  } from "react-tooltip";
 import { useSelector, useDispatch } from 'react-redux';
@@ -36,6 +36,7 @@ const Sidebar = () => {
     },
  
   ];
+  // ignore below line
   const isOpen2 = useSelector(state => state.helper.SideBarArrow);
 
   const [isOpen,SetisOpen] = useState(false);
@@ -45,7 +46,9 @@ const Sidebar = () => {
   }
 
   return (
-    <Container  isOpen={isOpen}>
+
+
+    <Container  $isOpen={isOpen}>
       <div className={`cstm-layer transition-all duration-0 text-black bg-slate-200 shadow-xl h-screen `}>
         <div className="cstm-logo-arrow pt-10 px-10 flex">
     
@@ -81,6 +84,7 @@ const Sidebar = () => {
         </MenuLinks>
       </div>
     </Container>
+
   );
 };
 
@@ -95,17 +99,17 @@ const Container = styled.div`
     .cstm-layer{
       z-index: 2;
       position: fixed;
-      width: ${props => props.isOpen ? "21rem":"0rem"};
+      width: ${props => props.$isOpen ? "21rem":"0rem"};
     }
     .cstm-btn-arrow {
-      margin-left: ${props => props.isOpen ? "16rem":"0rem"};
+      margin-left: ${props => props.$isOpen ? "16rem":"0rem"};
     }
     .ctsm-logo-name{
         font-weight: bold;
         font-size: 2.2rem;
     }
     .cstm-menu{
-      display:${props => !props.isOpen ? "none":""};
+      display:${props => !props.$isOpen ? "none":""};
     }
 
     
@@ -114,11 +118,11 @@ const Container = styled.div`
     /* <520px */
     .cstm-layer{
       position: fixed;
-      width: ${props => props.isOpen ? "21rem":"8rem"};
+      width: ${props => props.$isOpen ? "21rem":"8rem"};
       z-index:2;
     }
     .cstm-btn-arrow {
-      margin-left: ${props => props.isOpen ? "16rem":"0rem"};
+      margin-left: ${props => props.$isOpen ? "16rem":"0rem"};
     }
     
   } 
@@ -129,7 +133,7 @@ const Container = styled.div`
       position: fixed;
     }
     .cstm-btn-arrow {
-      margin-left: ${props => props.isOpen ?  "16rem" : "5rem"};
+      margin-left: ${props => props.$isOpen ?  "16rem" : "5rem"};
     }
     .ctsm-logo-name{
       font-size: 2.2rem;

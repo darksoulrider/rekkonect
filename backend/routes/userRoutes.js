@@ -6,10 +6,11 @@ const router = express.Router();
 import * as userController from "../controller/userController.js";
 
 // Authentication  -> controllers
-router.route("/login").post(userController.LoginController);
-router.route("/signup").post(userController.RegisterController);
-router.route("/signupWithGoogle").post(userController.GoogleLogin);
-router.route("/signupWithFacebook").post(userController.FacebookLogin);
+// router.route("/login").post(userController.LoginController);
+// router.route("/signup").post(userController.RegisterController);
+router.route("/employer/signup").post(userController.RegisterEmployer);
+// router.route("/signupWithGoogle").post(userController.GoogleLogin);
+// router.route("/signupWithFacebook").post(userController.FacebookLogin);
 
 // *** Profile routes ***
 

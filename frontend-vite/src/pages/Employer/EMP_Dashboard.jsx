@@ -38,8 +38,9 @@ const Container = styled.div`
   @media (min-width: ${props => props.theme.isMobile}) and (max-width: ${props => props.theme.isTab}){
     .outlet{
       margin-top:8rem;
-      margin-left:9.8rem;
-      border:2px solid red;
+      margin-left:8rem;
+      margin-right:0.3rem;
+      border:0.4rem solid red;
     }
     
   }

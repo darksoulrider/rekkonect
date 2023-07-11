@@ -8,13 +8,13 @@ const userRoles = ["candidate", "mentor", "employer"];
 const userSchema = new mongoose.Schema(
   {
     // make addresss compulsory and organisation name for EMPLOYER
-    firstname: {
+    firstName: {
       type: String,
       required: [true, "First name required"],
       minLength: [2, "Minimum 2 Characters required"],
       maxLength: [20, "Maximum 20 Characters required"],
     },
-    lastname: {
+    lastName: {
       type: String,
       required: [true, "Last name required"],
       minLength: [2, "Minimum 2 Characters required"],
@@ -25,6 +25,18 @@ const userSchema = new mongoose.Schema(
       required: [true, "Email address required"],
       validate: [validator.isEmail, "Email address is not valid"],
       unique: [true, "Email address must be unique"],
+    },
+    companyName: {
+      type: String,
+      required: [
+        function () {
+          if (this.userType == "employer") {
+            return true;
+          } else return false;
+        },
+        "Company name is required",
+      ],
+      minLength: [3, "Minimum 3 characters are required"],
     },
     password: {
       type: String,
@@ -39,15 +51,16 @@ const userSchema = new mongoose.Schema(
     birthdate: {
       type: Date,
       required: [true, "Birthdate is required"],
+      validate: [validator.isDate, "Birthdate must be right"],
     },
-    phone: {
+    phoneNumber: {
       type: String,
       required: [true, "Phone number is required"],
+      unique: [true, "phone number must be unique"],
       minLength: [10, "phone length should be 10 characters"],
       maxLength: [10, "phone length should be 10 characters"],
-      unique: [true, "phone number must be unique"],
     },
-    Bio: {
+    bio: {
       type: String,
       maxLength: [300, "Maximum 300 characters required"],
     },
@@ -56,6 +69,7 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     address: {
+      // can be considered as company address / candidate / mentor
       state: {
         type: String,
         required: [true, "State value is required"],
@@ -63,6 +77,10 @@ const userSchema = new mongoose.Schema(
       city: {
         type: String,
         required: [true, "City value is required"],
+      },
+      landMark: {
+        type: String,
+        required: [true, "Landmark value is required"],
       },
       pinCode: {
         type: Number,
@@ -105,19 +123,23 @@ const userSchema = new mongoose.Schema(
 );
 
 //  write all the methods here regarding the schema before saving data
-UserSchema.pre("save", async function (next) {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = await bcryptjs.hash(this.password, 12);
   next();
 });
 
-UserSchema.methods.getJWTToken = async function () {
-  return await jwt.sign({ _id: this._id }, process.env.JWT_ACCESS_SECRET, {
-    expiresIn: "5d",
-  });
+userSchema.methods.getJWTToken = async function () {
+  return await jwt.sign(
+    { _id: this._id, userType: this.userType, email: this.email },
+    process.env.JWT_ACCESS_SECRET,
+    {
+      expiresIn: "5d",
+    }
+  );
 };
 
-UserSchema.methods.comparePassword = async function (password) {
+userSchema.methods.comparePassword = async function (password) {
   return bcryptjs.compare(password, this.password);
 };
 

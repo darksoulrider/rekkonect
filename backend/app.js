@@ -33,8 +33,9 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 // ***** Request routes setup ***********
 import userRotues from "./routes/userRoutes.js";
 
-app.use("/api/v1", userRotues);
+app.use("/api/", userRotues);
 
+// ******** Only for test purpose *************
 const data = [
   {
     id: 1,

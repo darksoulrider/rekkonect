@@ -1,25 +1,18 @@
 import React from 'react'
-
+import { styled } from 'styled-components';
 const Profile = () => {
   return (
-    <div>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-      <h1>Profile</h1>
-    </div>
+    <Container>
+      
+    </Container>
   )
 }
 
 export default Profile;
+
+
+const Container = styled.div`
+
+
+
+`
