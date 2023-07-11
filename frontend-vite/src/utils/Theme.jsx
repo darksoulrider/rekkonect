@@ -6,10 +6,9 @@ export const darkTheme = {
     bgColor:"",
     bgNav:"",
 
-    isSmMobile: "520px",
-    isLgMobile: "768px",
-    isTablet: "1024px",
-    isDesktop: "1920px",
+    isMobile: "640px",
+    isTab: "880px",
+    isDesktop: "2000px",
 }
 export const lightTheme = {
     primary:"",
@@ -18,4 +17,8 @@ export const lightTheme = {
     bgColor:"",
     bgNav:"",
 
+}
+
+const deviceSize = {
+    
 }

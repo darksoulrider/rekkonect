@@ -24,6 +24,8 @@ import EMP_Dashboard from './pages/Employer/EMP_Dashboard'
 
 import Jobs from './pages/Employer/Jobs'
 import Communication from './pages/Employer/communication'
+import Profile from './pages/Employer/Profile'
+import Candidate from './pages/Employer/Candidate'
 const App = () => {
 
 
@@ -40,17 +42,15 @@ const App = () => {
       <GlobalStyles/>
       <Router>
 
-
-
-
-      
-
         <Routes>
-           {/* <Route path="/home" element={<GlobalDashboard/>}  /> */}
+           <Route path="/home" element={<GlobalDashboard/>}  />
 
           <Route  element={<EMP_Dashboard/>}> 
             <Route index path='/connect' element={<Communication/>}  />
             <Route path='/jobs' element={<Jobs/>}  />
+            <Route path='/candidates' element={<Candidate/>}  />
+            <Route path='/profile' element={<Profile/>}  />
+
           </Route> 
 
          

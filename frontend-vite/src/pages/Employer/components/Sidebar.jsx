@@ -8,6 +8,8 @@ import Logo from "/assets/images/logo.png";
 import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { Tooltip  } from "react-tooltip";
+import { useSelector, useDispatch } from 'react-redux';
+
 const Sidebar = () => {
   const MENUS = [
     {
@@ -34,6 +36,7 @@ const Sidebar = () => {
     },
  
   ];
+  const isOpen2 = useSelector(state => state.helper.SideBarArrow);
 
   const [isOpen,SetisOpen] = useState(false);
   const navigate = useNavigate(true);
@@ -86,9 +89,11 @@ export default Sidebar;
 
 const Container = styled.div`
 
-  @media (min-width: 330px) and (max-width:640px){
+  @media (max-width: ${props => props.theme.isMobile}){
     /* <520px */
+    
     .cstm-layer{
+      z-index: 2;
       position: fixed;
       width: ${props => props.isOpen ? "21rem":"0rem"};
     }
@@ -105,33 +110,29 @@ const Container = styled.div`
 
     
   } 
-  @media (min-width: 640px) and (max-width:880px){
+  @media (min-width: ${props => props.theme.isMobile} ) and (max-width: ${props => props.theme.isTab}){
     /* <520px */
     .cstm-layer{
-      position: absolute;
-      width: 0px;
+      position: fixed;
+      width: ${props => props.isOpen ? "21rem":"8rem"};
+      z-index:2;
+    }
+    .cstm-btn-arrow {
+      margin-left: ${props => props.isOpen ? "16rem":"0rem"};
     }
     
   } 
-  @media (min-width: 880px) and (max-width:1380px){
+  @media (min-width: ${props => props.theme.isTab}) and (max-width: ${props => props.theme.isDesktop}){
     /* <520px */
     .cstm-layer{
- 
+      z-index: 2;
+      position: fixed;
     }
     .cstm-btn-arrow {
       margin-left: ${props => props.isOpen ?  "16rem" : "5rem"};
     }
-    
-  } 
-
-  @media (min-width: 1380px){
-    
-    .cstm-layer{
-    
-      
-    }
-    .cstm-btn-arrow {
-      margin-left: ${props => props.isOpen ?  "16rem" : "5rem"};
+    .ctsm-logo-name{
+      font-size: 2.2rem;
     }
   } 
 

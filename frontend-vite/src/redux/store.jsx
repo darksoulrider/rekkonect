@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from  "./slices/checkstate"
 import themeReducer from "./slices/ThemeSlice"
+import helperReducer from "./slices/helper";
 import {pokemonApi} from "./apicall/auth";
 import { combineReducers } from "@reduxjs/toolkit";
-
 import storage from "redux-persist/lib/storage"
 import {
   persistReducer,
@@ -17,6 +17,7 @@ import {
 // add here to persist data [ do not add RTKquery ]
 const reducers = combineReducers({
   Theme: themeReducer,
+  
 })
 
 
@@ -35,6 +36,7 @@ const Store = configureStore({
     persistState :persistedReducer,
     pokemonApi : pokemonApi.reducer,
     userReducer: userReducer,
+    helper : helperReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

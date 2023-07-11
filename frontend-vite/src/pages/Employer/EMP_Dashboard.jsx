@@ -8,12 +8,14 @@ import EMP_Navbar from './components/EMP_Navbar'
 const EMP_Dashboard = () => {
   return (
     <Container className="flex ">
-        <div style={{maxWidth:"30rem"}}>
+        <div className='sidebar' style={{maxWidth:"30rem"}}>
           <Sidebar/>
         </div>
-        <div style={{minWidth:"100%"}}>
-          <EMP_Navbar/>
-          <Outlet/>
+        <div style={{minWidth:"100%",overflowY:"auto"}}>
+          <EMP_Navbar className='navbar' />
+          <div className='outlet'>
+            <Outlet />
+          </div>
       </div>
     </Container>
   )
@@ -23,6 +25,37 @@ export default EMP_Dashboard
 
 
 const Container = styled.div`
+
+/*  fix this according to screen widht */
+
+  @media (max-width: ${props => props.theme.isMobile}){
+    .outlet{
+      padding-top:8rem;
+    }
+
+    
+  }
+  @media (min-width: ${props => props.theme.isMobile}) and (max-width: ${props => props.theme.isTab}){
+    .outlet{
+      margin-top:8rem;
+      margin-left:9.8rem;
+      border:2px solid red;
+    }
+    
+  }
+  @media (min-width: ${props => props.theme.isTab}) and (max-width: ${props => props.theme.isDesktop}){
+      .outlet{
+      margin-top:8rem;
+      margin-left:9.8rem;
+      border:2px solid red;
+      min-height:100vh;
+    }
+  }
+
+
+  /* .navbar{
+    z-index: 11;
+  } */
 
 `
 
