@@ -1,10 +1,9 @@
-import {createGlobalStyle} from "styled-components"
+import { createGlobalStyle } from "styled-components"
 
 export const screenSize = {
-    mobile:"480px",
-    tab:"980",
-    desktop:"1380px",
-    extraLarge:"1920px",
+    isMobile: "640px",
+    isTab: "880px",
+    isDesktop: "2000px",
 }
 
 
@@ -18,9 +17,7 @@ const GlobalStyles = createGlobalStyle`
         padding: 0px;
         box-sizing: border-box;
     }
-    html{
-        font-size: 65.5%;
-    }
+
     body{
         /* font-family: 'Roboto', sans-serif; */
         overflow-x: hidden;
@@ -38,7 +35,7 @@ const GlobalStyles = createGlobalStyle`
         border-style: none;
         outline: none;
         height: 4.2rem;
-        min-width: 29rem;
+        width: 29rem;
         padding: 1.2rem;
         /* filter: drop-shadow(0.01rem 0.01rem 0.1rem black); */
     }
@@ -57,7 +54,10 @@ const GlobalStyles = createGlobalStyle`
         outline: none;
         border-style: none;
     }
-
+    html{
+        font-size: 65.5%;
+    }
+    
 `
 
 

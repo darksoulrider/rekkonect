@@ -2,9 +2,9 @@ import React from 'react'
 import { ThemeProvider, styled } from "styled-components"
 import GlobalStyles from './utils/GlobalStyles'
 import './App.css'
-import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import { darkTheme,lightTheme } from './utils/Theme'
-import {useSelector,useDispatch} from 'react-redux'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { darkTheme, lightTheme } from './utils/Theme'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Sidebar from './pages/Employer/components/Sidebar'
 
@@ -30,30 +30,30 @@ const App = () => {
 
 
 
-  
-  const data ={
-    primary:"#ffffff",
-    secondary:"#ff6400",
-    tertiary:"#157499"
+
+  const data = {
+    primary: "#ffffff",
+    secondary: "#ff6400",
+    tertiary: "#157499"
   }
 
   return (
     <ThemeProvider theme={darkTheme} >
-      <GlobalStyles/>
+      <GlobalStyles />
       <Router>
 
         <Routes>
-           <Route path="/home" element={<GlobalDashboard/>}  />
+          <Route path="/home" element={<GlobalDashboard />} />
 
-          <Route  element={<EMP_Dashboard/>}> 
-            <Route index path='/connect' element={<Communication/>}  />
-            <Route path='/jobs' element={<Jobs/>}  />
-            <Route path='/candidates' element={<Candidate/>}  />
-            <Route path='/profile' element={<Profile/>}  />
+          <Route element={<EMP_Dashboard />}>
+            <Route index path='/connect' element={<Communication />} />
+            <Route path='/jobs' element={<Jobs />} />
+            <Route path='/candidates' element={<Candidate />} />
+            <Route path='/profile' element={<Profile />} />
 
-          </Route> 
+          </Route>
 
-         
+
         </Routes>
       </Router>
     </ThemeProvider>
@@ -66,20 +66,20 @@ export default App
 
 // const data = themeValue === "light" ? lightTheme : darkTheme;
 
- {/* Mentor Section */}
-          {/* <Route path='/employer' element={""}>
+{/* Mentor Section */ }
+{/* <Route path='/employer' element={""}>
           </Route> */}
-          {/* Candidate Section */}
-          {/* <Route path='/employer' element={""}>
+{/* Candidate Section */ }
+{/* <Route path='/employer' element={""}>
           </Route> */}
-          {/* Admin Section */}
-          {/* <Route path='/employer' element={""}>
+{/* Admin Section */ }
+{/* <Route path='/employer' element={""}>
           </Route> */}
-          {/* No path match error */}
-          {/* <Route path='*'>  
+{/* No path match error */ }
+{/* <Route path='*'>  
             <Route element={<NotFound/>}/>
           </Route> */}
 
-          {/* <Route path='/profile' element={''}/>
+{/* <Route path='/profile' element={''}/>
             <Route path='/jobs' element={''}/>
             <Route path='/communication' element={''}/> */}

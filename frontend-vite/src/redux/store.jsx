@@ -1,10 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from  "./slices/checkstate"
+import userReducer from "./slices/checkstate"
 import themeReducer from "./slices/ThemeSlice"
 import helperReducer from "./slices/helper";
-import {pokemonApi} from "./apicall/auth";
+import { pokemonApi } from "./apicall/auth";
 import { combineReducers } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage"
+
+
+// *** RTK QUERY API CALLS ** [ DO NOT MAKE THEM PERSISTANT ] ***
+
+import { userEmployerProfile } from "./apicall/employer/userProfile";
+
+
+
 import {
   persistReducer,
   FLUSH,
@@ -12,42 +20,46 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER} from "redux-persist"
+  REGISTER
+} from "redux-persist"
 
 // add here to persist data [ do not add RTKquery ]
 const reducers = combineReducers({
   Theme: themeReducer,
-  
+
 })
 
 
 const persistConfig = {
-  key:'root',
+  key: 'root',
   version: 1,
   storage,
 }
 // blacklist:[''] // we can blacklist any of the reducers
-const persistedReducer = persistReducer(persistConfig,reducers)
+const persistedReducer = persistReducer(persistConfig, reducers)
 
 
 
 const Store = configureStore({
-  reducer:{
-    persistState :persistedReducer,
-    pokemonApi : pokemonApi.reducer,
-    userReducer: userReducer,
-    helper : helperReducer,
+  reducer: {
+    persistState: persistedReducer,
+    helper: helperReducer,
+    [userEmployerProfile.reducerPath]: userEmployerProfile.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(pokemonApi.middleware),
+    }).concat(
+      [
+        userEmployerProfile.middleware,
+      ]),
 });
 
-export default Store;
 
+
+export default Store;
 
 
 /*

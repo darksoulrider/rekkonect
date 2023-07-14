@@ -1,0 +1,54 @@
+
+                        <div className='bg-gray-300 cols-span-2'>
+                            <h3 className="text-black ">Company Details</h3>
+                        </div>
+                        <div>
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>FirstName</p>
+                            <input type="text" className='text-black shadow-sm ml-10' placeholder='Firstname' disabled={!isEdit}  {...register("firstName")}
+                                defaultValue={userdata.user.lastName}
+                            />
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "0.1rem" }} >Error</p>
+                        </div>
+                        <div>
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>LastName</p>
+                            <input type="text" className='text-black shadow ml-10' placeholder='Lastname' disabled={!isEdit} {...register("lastName")} />
+                            {/* <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "0.1rem" }} >Error</p> */}
+                        </div>
+                        <div>
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>Email</p>
+                            <input type="text" className='text-black shadow-md ml-10' placeholder='E-mail' disabled={!isEdit} {...register("email")} />
+                            {/* <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "0.1rem" }} >Error</p> */}
+                        </div>
+                        <div>
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>Contact</p>
+                            <input type="text" className='text-black shadow-md ml-10' placeholder='Contact' disabled={!isEdit} {...register("contact")} />
+                            {/* <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "0.1rem" }} >Error</p> */}
+                        </div>
+                        <div className=''>
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>Company Name</p>
+                            <input type="text" className='text-black shadow-md ml-10 ' placeholder='Company Name' disabled={!isEdit} {...register("companyName")}
+                                defaultValue={userdata.user.companyName}
+                            />
+                            {/* <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "0.1rem" }} >Error</p> */}
+                        </div>
+                        <div>
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>BirthDate</p>
+                            <input type="date" className='text-black shadow-md ml-10' placeholder='DOB' disabled={!isEdit} {...register("birthDate")} />
+                            {/* <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "0.1rem" }} >Error</p> */}
+                        </div>
+                        <div>
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>State</p>
+                            <input type="text" className='text-black shadow-md ml-10' placeholder='State' disabled={!isEdit} {...register("state")} />
+                            {/* <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "0.1rem" }} >Error</p> */}
+                        </div>
+                        <div>
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>City</p>
+                            <input type="text" className='text-black shadow-md ml-10' placeholder='City' disabled={!isEdit} {...register("city")} />
+                            {/* <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "0.1rem" }} >Error</p> */}
+                        </div>
+                        <div>
+                            <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>LandMark</p>
+                            <input type="text" className='text-black shadow-md ml-10' placeholder='landmark' disabled={!isEdit} {...register("landmark")} />
+                            {/* <p style={{ color: "black", fontSize: "1.1rem", marginLeft: "3rem", fontWeight: "bold", marginBottom: "0.1rem" }} >Error</p> */}
+                        </div>
+                   
