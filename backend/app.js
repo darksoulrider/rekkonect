@@ -7,6 +7,7 @@ import path from "path";
 import morgan from "morgan";
 import helmet from "helmet";
 import { fileURLToPath } from "url";
+import cookieParser from "cookie-parser";
 
 // *****************  App configuration ***************
 const __filename = fileURLToPath(import.meta.url);
@@ -14,26 +15,28 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: "./config/.env" });
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+app.use(cookieParser());
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("dev"));
 
-app.use(cors());
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//   })
-// );
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 // ***** Request routes setup ***********
 import userRotues from "./routes/userRoutes.js";
-
+import employeRoutes from "./routes/employerRoutes.js";
 app.use("/api/", userRotues);
+app.use("/api/", employeRoutes);
 
 // ******** Only for test purpose *************
 const data = [
@@ -53,6 +56,7 @@ app.get("/test", (req, res) => {
     data: data,
   });
 });
+
 // **** global error handling settup ******
 import ErrorMiddleware from "./middleware/errorMiddleware.js";
 app.use(ErrorMiddleware);

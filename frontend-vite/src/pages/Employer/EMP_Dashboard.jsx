@@ -8,14 +8,14 @@ import EMP_Navbar from './components/EMP_Navbar'
 const EMP_Dashboard = () => {
   return (
     <Container className="flex ">
-        <div className='sidebar' style={{maxWidth:"30rem"}}>
-          <Sidebar/>
+      <div className='sidebar' style={{ maxWidth: "30rem" }}>
+        <Sidebar />
+      </div>
+      <div style={{ minWidth: "100%" }}>
+        <EMP_Navbar className='navbar' />
+        <div className='outlet'>
+          <Outlet />
         </div>
-        <div style={{minWidth:"100%",overflowY:"auto"}}>
-          <EMP_Navbar className='navbar' />
-          <div className='outlet'>
-            <Outlet />
-          </div>
       </div>
     </Container>
   )
@@ -32,23 +32,20 @@ const Container = styled.div`
     .outlet{
       padding-top:8rem;
     }
-
-    
   }
   @media (min-width: ${props => props.theme.isMobile}) and (max-width: ${props => props.theme.isTab}){
     .outlet{
       margin-top:8rem;
       margin-left:8rem;
       margin-right:0.3rem;
-      border:0.4rem solid red;
+      /* border:0.4rem solid red; */
     }
     
   }
   @media (min-width: ${props => props.theme.isTab}) and (max-width: ${props => props.theme.isDesktop}){
       .outlet{
-      margin-top:8rem;
+      margin-top:10rem;
       margin-left:9.8rem;
-      border:2px solid red;
       min-height:100vh;
     }
   }

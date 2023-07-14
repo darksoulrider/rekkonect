@@ -27,7 +27,7 @@ import { userModal } from "../modal/userModal.js";
 //   console.log(user);
 //   sendToken(res, user, "User Successfully registered..", 200);
 // });
-
+// ! handle login for email case sensitiveness
 export const RegisterEmployer = catchAsyncError(async (req, res, next) => {
   // ! write logic for terms acceptance - [required]
   const {

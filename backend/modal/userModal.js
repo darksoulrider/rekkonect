@@ -119,7 +119,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "No user type given"],
     },
   },
-  { timestamps: true }
+  { timestamps: true, validateBeforeSave: true }
 );
 
 //  write all the methods here regarding the schema before saving data
