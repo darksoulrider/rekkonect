@@ -5,7 +5,7 @@ const ProfessionalInfo = ({ userdata }) => {
     const [recommend, Setrecommend] = useState("");
 
     return (
-        <Container className="shadow-md  h-screen ">
+        <Container className="shadow-md">
             <h1>Additional Information</h1>
             <div className='ml-20'>
                 <p className="font-bold text-2xl mb-4 tracking-wider">Why {userdata.user.companyName} ? </p>
@@ -16,6 +16,10 @@ const ProfessionalInfo = ({ userdata }) => {
                     </textarea>
                     <button className='bg-orange-300 text-black-700 w-32 h-10 rounded-md'>Submit</button>
                 </div>
+            </div>
+            <div>
+                <p>{userdata.user.companyName} Head Quarters - Location</p>
+                <p>File Uploads</p>
             </div>
             <div className='ml-20'>
                 <p className="text-2xl tracking-wider ">Recommend Mentor</p>

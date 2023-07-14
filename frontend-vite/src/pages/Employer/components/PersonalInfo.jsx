@@ -115,7 +115,7 @@ const PersonalInfo = ({ userdata }) => {
 
 
     return (
-        <Container className="shadow-md h-screen">
+        <Container className="shadow-md">
             <form onSubmit={handleSubmit(updateProfile)}>
                 <div className={`cstm-btn-layer flex items-center justify-between`}>
                     <h1>Personal Information</h1>
@@ -132,7 +132,7 @@ const PersonalInfo = ({ userdata }) => {
                                 // style={{ color: "black", fontSize: "1.1rem", marginBottom: "1rem" }}
                                 <div key={item.title}>
                                     <p className='cstm-title'>{item.title}</p>
-                                    <input type={`${item.title === "BirthDate" ? "date" : "text"}`} className='cstm-input text-black shadow-md' placeholder={item.placeholder} disabled={!isEdit}  {...register(item.register)}
+                                    <input type={`${item.title === "BirthDate" ? "date" : "text"}`} className='text-black shadow-md' placeholder={item.placeholder} disabled={!isEdit}  {...register(item.register)}
                                     />
                                 </div>
                             )
@@ -149,7 +149,10 @@ export default PersonalInfo
 
 const Container = styled.div`
 /* border-right: 1px solid rgba(56, 53, 53,0.2); */
-    @media(min-width: ${props => props.theme.isMobile}) and (max-width: ${props => props.theme.isTab}) { 
+
+
+    @media(max-width: ${props => props.theme.isMobile}) { 
+        padding: 2rem;
         .cstm-btn-layer {
             display: flex;
             justify-content: flex-between;
@@ -207,7 +210,8 @@ const Container = styled.div`
             >div>input{
                 border: 1px solid rgba(2,1,2,0.5);
                 margin-bottom:1.5rem;
-                background-color: #f9f6f6;
+                /* background-color: #f9f6f6;/ */
+                background-color: #fdfcfc;
                 
                 
             }
@@ -221,8 +225,82 @@ const Container = styled.div`
             }
         }        
     }
+    @media(min-width: ${props => props.theme.isMobile}) and (max-width: ${props => props.theme.isTab}) { 
+        .cstm-btn-layer {
+            display: flex;
+            justify-content: flex-between;
+            align-items: center;
+            
+            >h1{
+                font-size:2rem;
+                color: #272626;
+                font-weight:800;
+                font-family: "roboto";
+                margin: 1rem 3rem;
+            }
+            >.cstm-edit{
+                width:6rem;
+                height:3rem;
+                color:white;
+                background-color: rgb(234 88 12 );
+                font-weight:bold;
+                font-size:1.3rem;
+                border-radius: 0.7rem;
+                margin-right:2.5rem;
+                cursor:pointer;
+                &:hover{
+                    background-color: #2353a9
+                }
+            }
+            .cstm-btns{
+                >.cstm-cancle{
+                    width:8rem;
+                    height: 3rem;
+                    margin-right: 1.5rem;
+                    background-color: #157499;
+                    color:white;
+                    font-weight: 800;
+                    border-radius: 0.8rem;
+                }
+                >.cstm-submit{
+                    width:8rem;
+                    height: 3rem;
+                    color:white;
+                    background-color: #ea580c;
+                    margin-right:2.5rem;
+                    font-weight: 800;
+                    border-radius: 0.8rem;
+                }
+            }
+        }
+        .cstm-form{
+            margin: 1rem 3rem;
+            display: flex;
+            flex-direction:  column;
+            /* align-items: center; */
+            /* grid-template-columns:1fr  ; */
+            gap:1rem;
+            
+            >div>input{
+                border: 1px solid rgba(2,1,2,0.5);
+                margin-bottom:1.5rem;
+                /* background-color: #f9f6f6; */
+                background-color: #fdfcfc;
+                
+            }
+            .cstm-title{
+                color: #252424;
+                font-size:1.6rem;
+                font-weight: 600;
+                margin-bottom:0.4rem;
+                letter-spacing: 0.03rem;
+                
+            }
+        }        
+    }
     @media(min-width: ${props => props.theme.isTab}) and (max-width: ${props => props.theme.isLargeTab}) { 
-        
+        padding: 2rem;
+        margin-top: 2.7rem;
         .cstm-btn-layer {
             display: flex;
             justify-content: flex-between;
@@ -279,7 +357,8 @@ const Container = styled.div`
             >div>input{
                 border: 1px solid rgba(2,1,2,0.5);
                 margin-bottom:1.5rem;
-                background-color: #f9f6f6;
+                /* background-color: #f9f6f6; */
+                background-color: #fdfcfc;
                 
             }
             .cstm-title{
@@ -294,8 +373,7 @@ const Container = styled.div`
     }
 
     @media(min-width: ${props => props.theme.isLargeTab}) and (max-width: ${props => props.theme.isDesktop}) { 
-        min-height:100%;
-        background-color: gray;
+       
         .cstm-btn-layer {
             display: flex;
             justify-content: flex-between;
@@ -344,16 +422,15 @@ const Container = styled.div`
         }
         .cstm-form{
             margin: 1rem 3rem;
-            display: flex;
-            flex-direction: column;
-            /* grid-template-columns:1fr 1fr */
+            display: grid;
+            grid-template-columns:1fr 1fr;
             gap:1rem;
             >div>input{
                 border: 1px solid rgba(2,1,2,0.5);
                 margin-bottom:1.5rem;
-                background-color: #f9f6f6;
-                /* width:20rem; */
-                
+                /* background-color: #f9f6f6; */
+                background-color: #fdfcfc;
+                margin-right: 1rem;
             }
             .cstm-title{
                 color: #252424;

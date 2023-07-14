@@ -44,9 +44,9 @@ const Container = styled.div`
   }
   @media (min-width: ${props => props.theme.isTab}) and (max-width: ${props => props.theme.isDesktop}){
       .outlet{
-      margin-top:10rem;
+      margin-top:8rem;
       margin-left:9.8rem;
-      min-height:100vh;
+      height:100vh;
     }
   }
 
