@@ -3,6 +3,9 @@ import ErrorHandler from "../../utils/errorHandler.js";
 import sendToken from "../../utils/sendtoken.js";
 import { userModal } from "../../modal/userModal.js";
 import { AdditionalInfoModel } from "../../modal/employer/AdditionalInfo.js";
+import getDataUri from "../../utils/dataUri.js";
+import cloudinary from "cloudinary";
+
 export const UpdateEmployerPersonalInfo = catchAsyncError(
   async (req, res, next) => {
     // ! dont trust user given in body email , take out email from jwt and then do search result
@@ -84,6 +87,27 @@ export const addAdditionalInfo = catchAsyncError(async (req, res, next) => {
   });
 });
 
-export const updateAdditionalInfo = catchAsyncError(
-  async (res, req, next) => {}
-);
+export const updateAdditionalInfo = catchAsyncError(async (req, res, next) => {
+  const files = req.files;
+  // loop below to upload data,
+  res.status(200).json({
+    files: files,
+  });
+});
+
+export const fileUpload = catchAsyncError(async (req, res, next) => {
+  const file = req.files[0];
+  // i can access file.buffer give me way to send it to cloudinaryy as well
+  const seeme = getDataUri(file);
+  const sendfile = await cloudinary.v2.uploader.upload(seeme.content, {
+    public_id: "mukesh file",
+    folder: "assets",
+  });
+  res.status(200).json({
+    success: true,
+    message: "you have successfully uploaded..",
+    public_id: sendfile.public_id,
+    secure_url: sendfile.secure_url,
+  });
+});
+export const deleteFile = catchAsyncError(async (req, res, next) => {});

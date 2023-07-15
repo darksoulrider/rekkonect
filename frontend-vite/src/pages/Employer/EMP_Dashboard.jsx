@@ -4,6 +4,8 @@ import Sidebar from './components/Sidebar'
 import { Outlet } from 'react-router-dom'
 import { styled } from 'styled-components'
 import EMP_Navbar from './components/EMP_Navbar'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // this will have all the components and the outlets
 const EMP_Dashboard = () => {
   return (
@@ -16,6 +18,7 @@ const EMP_Dashboard = () => {
         <div className='outlet'>
           <Outlet />
         </div>
+        <ToastContainer />
       </div>
     </Container>
   )

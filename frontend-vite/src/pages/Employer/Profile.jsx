@@ -154,10 +154,8 @@ const Container = styled.div`
     .cstm-info{
       display: flex;
       width: 100%;
-      height: 100vh;
       justify-content: space-around;
       flex-direction: column;
-
       >.cstm-personal{
         background-color: #ffffff;
         color:white;

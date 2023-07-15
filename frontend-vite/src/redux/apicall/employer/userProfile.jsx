@@ -5,7 +5,7 @@ import { MainUrl } from '../GlobalRoutes';
 export const userEmployerProfile = createApi({
     reducerPath: 'userEmployerProfile',
     baseQuery: fetchBaseQuery({ baseUrl: MainUrl }),
-    tagTypes: ['info'],
+    tagTypes: ['info', 'additionalInfo'],
     endpoints: (builder) => ({
         getProfile: builder.query({
             query: () => `/employer/profile/personalinfo`,
@@ -19,8 +19,13 @@ export const userEmployerProfile = createApi({
             }),
             invalidatesTags: ['info']
         }),
-        UserData: builder.query({
-            query: () => `/test`
+        getAdditionalInfo: builder.query(),
+        uploadFile: builder.mutation({
+            query: (FormData) => ({
+                url: '/employer/profile/fileupload',
+                method: 'POST',
+                body: FormData,
+            }),
         })
     }),
 })
@@ -30,5 +35,6 @@ export const userEmployerProfile = createApi({
 export const {
     useGetProfileQuery,
     useUpdateProfileMutation,
-    useUserDataQuery
+    useUploadFileMutation,
+
 } = userEmployerProfile;

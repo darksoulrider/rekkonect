@@ -109,11 +109,6 @@ const PersonalInfo = ({ userdata }) => {
     ]
 
 
-
-
-
-
-
     return (
         <Container className="shadow-md">
             <form onSubmit={handleSubmit(updateProfile)}>
@@ -300,7 +295,6 @@ const Container = styled.div`
     }
     @media(min-width: ${props => props.theme.isTab}) and (max-width: ${props => props.theme.isLargeTab}) { 
         padding: 2rem;
-        margin-top: 2.7rem;
         .cstm-btn-layer {
             display: flex;
             justify-content: flex-between;

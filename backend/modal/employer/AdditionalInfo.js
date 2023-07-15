@@ -11,9 +11,27 @@ const AdditionalInfoSchema = new mongoose.Schema({
   aboutCompany: {
     type: String,
   },
+  headquarter: {
+    type: String,
+  },
+  companyWebiste: {
+    type: String,
+  },
   recommendedMentor: [
     {
       type: String,
+    },
+  ],
+  files: [
+    {
+      public_id: {
+        type: String,
+        required: [true, "Public id is required"],
+      },
+      public_url: {
+        type: String,
+        required: [true, "Public url is required"],
+      },
     },
   ],
 });

@@ -4,7 +4,7 @@ const router = express.Router();
 // ***  importing the controllers ***
 
 import * as userController from "../controller/userController.js";
-import * as employerProfileController from "../controller/employer/userProfile.js";
+import * as employerProfileController from "../controller/employer/employerUserProfile.js";
 import { isAuthenticated } from "../middleware/isAuthenticated.js";
 
 // Authentication  -> controllers
