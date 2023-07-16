@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import PersonalInfo from "./components/PersonalInfo";
 import ProfessionalInfo from "./components/ProfessionalInfo";
-import { useGetProfileQuery } from "../../redux/apicall/employer/userProfile";
+import { useGetProfileQuery, useGetAdditionalInfoQuery } from "../../redux/apicall/employer/userProfile";
 
 const Profile = () => {
 

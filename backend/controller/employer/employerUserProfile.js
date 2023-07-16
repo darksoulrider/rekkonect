@@ -5,7 +5,10 @@ import { userModal } from "../../modal/userModal.js";
 import { AdditionalInfoModel } from "../../modal/employer/AdditionalInfo.js";
 import getDataUri from "../../utils/dataUri.js";
 import cloudinary from "cloudinary";
-
+import crypto from "crypto";
+import { response } from "express";
+import { rmSync } from "fs";
+import mongoose from "mongoose";
 export const UpdateEmployerPersonalInfo = catchAsyncError(
   async (req, res, next) => {
     // ! dont trust user given in body email , take out email from jwt and then do search result
@@ -55,6 +58,22 @@ export const GetPersonalInfo = catchAsyncError(async (req, res, next) => {
 
 // ********* Additional INformation Schema ************* [ setting req.id or req.email form isAuth ]
 // we can separate this email into isAuthenticated
+
+// ******** get Additional info ************
+
+export const getAdditionalInfo = catchAsyncError(async (req, res, next) => {
+  const { id, email, userType, user } = req;
+  const addinfo = await AdditionalInfoModel.findOne({ user: id }).populate(
+    "user"
+  );
+  if (!addinfo) return next(new ErrorHandler("UnAuthorized access", 400));
+
+  res.status(200).json({
+    success: true,
+    addinfo,
+  });
+});
+
 export const addAdditionalInfo = catchAsyncError(async (req, res, next) => {
   const { aboutCompany, mentor } = req.body;
   const _id = req.id;
@@ -63,14 +82,14 @@ export const addAdditionalInfo = catchAsyncError(async (req, res, next) => {
 
   let user = await userModal.findOne({ email: email, userType: userType });
 
-  if (!user) next(new ErrorHandler("UnAuthorized access", 400));
+  if (!user) return next(new ErrorHandler("UnAuthorized access", 400));
 
   let info = await AdditionalInfoModel.findOne({ user: _id });
-  // console.log(info);
+
   if (info) {
     info.aboutCompany = aboutCompany || info.aboutCompany;
     if (!info.recommendedMentor.includes(mentor)) {
-      info.recommendedMentor.push(mentor);
+      info.recommendeMentor.push(mentor);
     }
     await info.save();
   } else {
@@ -87,27 +106,111 @@ export const addAdditionalInfo = catchAsyncError(async (req, res, next) => {
   });
 });
 
-export const updateAdditionalInfo = catchAsyncError(async (req, res, next) => {
-  const files = req.files;
-  // loop below to upload data,
-  res.status(200).json({
-    files: files,
+//  ********** Send why ? [ about company ] ***************
+
+export const whyinfo = catchAsyncError(async (req, res, next) => {
+  const { why } = req.body;
+  const { id, userType, email } = req; // token
+  console.log(`req.body => ${req.body.why}`);
+
+  let info = await AdditionalInfoModel.findOne({ user: id });
+  if (info) {
+    info.aboutCompany = why || info.aboutCompany;
+    await info.save();
+  } else {
+    info = await AdditionalInfoModel.create({
+      aboutCompany: why,
+      user: id,
+    });
+  }
+
+  res.status(201).json({
+    success: true,
+    info,
   });
 });
 
+// ************** Employer files upload ********
+
+// i can access file.buffer give me way to send it to cloudinaryy as well
 export const fileUpload = catchAsyncError(async (req, res, next) => {
+  const { id, email, userType, user } = req;
+
+  // file upload process
   const file = req.files[0];
-  // i can access file.buffer give me way to send it to cloudinaryy as well
-  const seeme = getDataUri(file);
-  const sendfile = await cloudinary.v2.uploader.upload(seeme.content, {
-    public_id: "mukesh file",
-    folder: "assets",
-  });
+  const rend = crypto.randomBytes(12).toString("hex");
+  const uri = getDataUri(file);
+
+  const sendfile = await cloudinary.v2.uploader.upload(
+    uri.content,
+    {
+      public_id: `${rend}-${file.originalname}`,
+      folder: "assets",
+    },
+    (error, result) => {
+      if (error) {
+        return next(new ErrorHandler("File upload failed."), 400);
+      }
+    }
+  );
+
+  // save to database successfully.core-styles-module_arrow__cvMwQ
+  let info = await AdditionalInfoModel.findOne({ user: id });
+
+  if (sendfile.public_id) {
+    if (info) {
+      info.files.push({
+        public_id: sendfile.public_id,
+        secure_url: sendfile.secure_url,
+      });
+      await info.save();
+    } else {
+      info = await AdditionalInfoModel.create({
+        user: id,
+        files: [
+          {
+            public_id: sendfile.public_id,
+            secure_url: sendfile.secure_url,
+          },
+        ],
+      });
+    }
+  }
+
   res.status(200).json({
     success: true,
-    message: "you have successfully uploaded..",
+    message: "File uploaded..",
     public_id: sendfile.public_id,
     secure_url: sendfile.secure_url,
   });
 });
-export const deleteFile = catchAsyncError(async (req, res, next) => {});
+
+// ****** employer file delete ************
+export const deleteFile = catchAsyncError(async (req, res, next) => {
+  const doc_id = req.params.fileId;
+
+  const { id, email, userType, user } = req; // from token
+
+  /*
+    let info = await AdditionalInfoModel.findOne({ _id: add_id ,});
+    we cann use this to check if the doc is present,
+  */
+  const check_file = await AdditionalInfoModel.findOne({ user: id });
+  const isExist = check_file.files.some((file) => file._id.equals(doc_id));
+
+  if (!isExist) return next(new ErrorHandler("File does not exist"));
+
+  let info = await AdditionalInfoModel.findOneAndUpdate(
+    { user: id },
+    { $pull: { files: { _id: doc_id } } },
+    { new: true }
+  );
+
+  if (!info) return next(new ErrorHandler("not deleted ", 400));
+
+  res.status(200).json({
+    success: true,
+    message: "deleted successfully",
+    info,
+  });
+});

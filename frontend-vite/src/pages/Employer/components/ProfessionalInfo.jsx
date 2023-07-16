@@ -1,52 +1,115 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+
+// *** library imports ****
 import styled from "styled-components"
 import { useForm } from 'react-hook-form';
 import { toast } from "react-toastify"
-import { object } from 'yup';
-import { useUploadFileMutation } from '../../../redux/apicall/employer/userProfile';
+import { ThreeDots } from "react-loader-spinner"
+
+
+
+// ** api call imports **
+import { useUploadFileMutation, useDeleteFileMutation, useGetAdditionalInfoQuery, useSendwhyMutation } from '../../../redux/apicall/employer/userProfile';
 
 const ProfessionalInfo = ({ userdata }) => {
+    //  ** useStates **
 
+    const [isUploadclicked, SetisUploadclicked] = useState(false);
+    const [isDeleteClicked, SetisDeleteClicked] = useState(false);
+
+    const [whyValue, setWhyValue] = useState(undefined);
+    const [isDataFetched, setIsDataFetched] = useState(false);
+
+
+    // *********** Fetcing all Info for additinal section ******
+    const { data: getinfodata, isLoading: isLoadinginfo, isSuccess: isSuccessinfo, isError: isErrorinfo } = useGetAdditionalInfoQuery(undefined, {
+        refetchOnMountOrArgChange: true,
+    });
+
+
+
+
+    //  **********   useForm for file uplaod **************
     const { register: registerFile, handleSubmit: handleSubmitFile, formState: { errors: errorsFile } } = useForm();
-
-    const [upload, { isError, isSuccess, isLoading }] = useUploadFileMutation();
+    // api call upload file
+    const [upload, { isError: isFileError, isSuccess: isSuccessFile, isLoading: isLoadingFile }] = useUploadFileMutation();
     const uploadFile = async (data) => {
-
         if (data.files.length === 0) {
-            console.log("No files selected");
             return toast.error("No files selected", {
                 autoClose: 1000,
             });
         }
-
+        SetisUploadclicked(!isUploadclicked);
         const myForm = new FormData();
         myForm.append('files', data.files[0])
-        console.log(myForm)
-        // const dat = Object.values(data);
-        // dat.map((file) => myForm.append(`files`, file));
-        const send = await upload(myForm);
-        if (isError) {
-            toast.error(isError.message);
-        }
-        if (isLoading) {
-            toast.warn(isLoading.message)
-        }
-        if (isSuccess) {
-            toast.success("successfully uploaded")
+        try {
+            const response = await upload(myForm);
+        } catch (error) {
+            toast.error(error.message);
         }
     }
+
+    useEffect(() => {
+        if (isSuccessFile) {
+            toast.success("successfully uploaded")
+            SetisUploadclicked(!isUploadclicked);
+        }
+        if (isFileError) {
+            toast.error("failed to upload")
+            SetisUploadclicked(!isUploadclicked);
+        }
+    }, [isSuccessFile, isFileError]);
+
+
+    // ************** api call delete file *********************
+    const [deleteFile, { isError: isDeleteError, isSuccess: isDeleteSucces, isLoading: isDeleteLoading }] = useDeleteFileMutation();
+
+    const DeleteFile = async (id) => {
+        const data = await deleteFile(id);
+    }
+
+
+    // ************* Why company detatils ****************
+    // useForm for it ->
+
+    useEffect(() => {
+        if (getinfodata) {
+            setWhyValue(getinfodata.addinfo.aboutCompany)
+        }
+    }, [getinfodata])
+
+    const [sendingWhy, { isSuccess: isSendTrue }] = useSendwhyMutation();
+    const sendWhy = async (e) => {
+        e.preventDefault();
+        const why = await sendingWhy({ why: whyValue });
+
+    }
+
+    // ************* Head Quarter details ****************
+
+
+
+
+
+
+    if (isLoadinginfo) {
+        return <h1>Loading.....</h1>
+    }
+
+
     return (
         <Container className="" >
             <h1>Additional Information</h1>
             <div className='cstm-why-cp'>
                 <p className="">Why {userdata.user.companyName} ? </p>
 
-                <div className='cstm-textarea'>
-                    <textarea rows="4" cols="100" className='cstm-text-area p-3 text-2xl w-[80%] border bg-slate-50 text-gray-600'>
+                <form onSubmit={sendWhy} className='cstm-textarea'>
+                    <textarea value={whyValue} onChange={(e) => setWhyValue(e.target.value)} rows="4" cols="100" className='cstm-text-area p-3 text-2xl w-[80%] border bg-slate-50 text-gray-600'>
 
                     </textarea>
-                    <button className='cstm-btn bg-orange-300 text-black-700 w-32 h-10 rounded-md'>Submit</button>
-                </div>
+                    <button type='submit' className='cstm-btn bg-orange-300 text-black-700 w-32 h-10 rounded-md'>Submit</button>
+                </form>
             </div>
             <div className='cstm-addinfo-layer'>
                 <div className='cstm-all cstm-headQurter'>
@@ -67,18 +130,39 @@ const ProfessionalInfo = ({ userdata }) => {
                     <p>File Uploads</p>
                     <form onSubmit={handleSubmitFile(uploadFile)} className='cstm-input-btn'>
                         <input {...registerFile('files')} type="file" multiple={true} />
-                        <button type='submit' className='btn'>upload</button>
+                        <button type='submit' className='btn'>
+                            {
+                                isUploadclicked ?
+                                    <ThreeDots
+                                        height="25"
+                                        width="40"
+                                        radius="9"
+                                        color="#0f5680"
+                                        ariaLabel="three-dots-loading"
+                                        wrapperStyle={{
+                                            marginLeft: "3.2rem",
+                                        }}
+                                    /> : "Upload"
+                            }
+                        </button>
                     </form>
                     <div className="files">
                         {/* defualt button style comming from globle */}
-                        <div className='file-delete '>
-                            <p className="file">file.png</p>
-                            <button type="button">delete</button>
-                        </div>
-                        <div className='file-delete '>
-                            <p className="file">file.png</p>
-                            <button type="button">delete</button>
-                        </div>
+                        {
+                            getinfodata?.addinfo.files.map((file) => {
+                                const filename = file.public_id.split("-").pop();
+
+                                return (
+                                    <div key={file?.public_id} className='file-delete '>
+                                        <p className="file">{
+                                            filename?.substring(0, 6) + "..."
+                                        }</p>
+                                        <button onClick={() => DeleteFile(file?._id)} type="button">delete</button>
+                                    </div>
+                                )
+                            })
+                        }
+
                     </div>
                 </div>
             </div>
@@ -88,8 +172,6 @@ const ProfessionalInfo = ({ userdata }) => {
                     <input className="text-gray-700" />
                     <button className='bg-orange-300 w-48 ml-10 h-14 cursor-pointer hover:bg-[#157499] hover:text-white rounded-md'>Recommend</button>
                 </div>
-                <li>mack@gmail.com  | <button>delete</button></li>
-                <li>dark@gmail.com  | <button>delete</button></li>
             </div>
         </Container >
     )
@@ -221,7 +303,7 @@ const Container = styled.div`
                     >.file-delete{
                         display:flex;
                         align-items: center;
-                        gap:10rem;
+                        /* gap:15rem; */
                         /* border:1px solid black; */
                         width: 100%;
                         margin-bottom: 1rem;
@@ -232,6 +314,7 @@ const Container = styled.div`
                             height: 3rem;
                             width: 7rem;
                             margin:0rem;
+                            margin-left: 14rem;
                             color:white;
                             border-radius: 0.5rem;
                             cursor: pointer;

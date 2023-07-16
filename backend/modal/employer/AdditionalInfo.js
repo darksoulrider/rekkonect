@@ -7,6 +7,7 @@ const AdditionalInfoSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "User",
     required: [true, "User reference is required"],
+    unique: true,
   },
   aboutCompany: {
     type: String,
@@ -17,7 +18,7 @@ const AdditionalInfoSchema = new mongoose.Schema({
   companyWebiste: {
     type: String,
   },
-  recommendedMentor: [
+  recommendMentor: [
     {
       type: String,
     },
@@ -28,9 +29,9 @@ const AdditionalInfoSchema = new mongoose.Schema({
         type: String,
         required: [true, "Public id is required"],
       },
-      public_url: {
+      secure_url: {
         type: String,
-        required: [true, "Public url is required"],
+        required: [true, "secure url is required"],
       },
     },
   ],

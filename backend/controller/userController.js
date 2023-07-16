@@ -4,6 +4,7 @@ import catchAsyncError from "../middleware/catchAsynchError.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import sendToken from "../utils/sendtoken.js";
 import { userModal } from "../modal/userModal.js";
+import isGmail from "../utils/isGmail.js";
 // Register controllers
 // export const RegisterController = catchAsyncError(async (req, res, next) => {
 //   const {
@@ -54,6 +55,10 @@ export const RegisterEmployer = catchAsyncError(async (req, res, next) => {
   ) {
     return next(new ErrorHandler("Please Enter all the field..", 400));
   }
+  if (isGmail(email))
+    return next(
+      new ErrorHandler("No Gmail address is allowed to be registered", 400)
+    );
 
   if (userType != "employer")
     return next(new ErrorHandler("User must be employer", 400));

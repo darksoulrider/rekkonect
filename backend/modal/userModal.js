@@ -119,13 +119,16 @@ const userSchema = new mongoose.Schema(
       required: [true, "No user type given"],
     },
   },
-  { timestamps: true, validateBeforeSave: true }
+  { timestamps: false, validateBeforeSave: true }
 );
 
 //  write all the methods here regarding the schema before saving data
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = await bcryptjs.hash(this.password, 12);
+  if (this.birthdate instanceof Date) {
+    this.birthdate = this.birthdate.toISOString().split("T")[0];
+  }
   next();
 });
 

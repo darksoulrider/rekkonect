@@ -4,7 +4,7 @@ const storage = multer.memoryStorage();
 
 // * Employer uploading *
 
-export const profileFiles = multer(console.log("mack"), {
+export const profileFiles = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (!file) {

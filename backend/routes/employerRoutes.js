@@ -16,24 +16,29 @@ router
 // *********** Additional info routes *********
 router
   .route("/employer/profile/additionalinfo")
-  .post(isAuthenticated, employerProfileController.addAdditionalInfo);
+  .post(isAuthenticated, employerProfileController.addAdditionalInfo)
+  .get(isAuthenticated, employerProfileController.getAdditionalInfo);
 
 router
-  .route("/employer/profile//:id")
+  .route("/employer/profile/:id")
   .put(isAuthenticated, employerProfileController.addAdditionalInfo);
 
 // *********** upload files routes ***********
 
 // think how can we shorten this below url
-router.route("/employer/profile/additionalinfo/why");
-router.route("/employer/profile/additionalinfo/recommend");
-// --- FIle upload ----
+router
+  .route("/employer/profile/why")
+  .post(isAuthenticated, employerProfileController.whyinfo);
+
+router.route("/employer/profile/recommend");
+
+// --- FIle upload ---- [ fixed - dont change]
 router
   .route("/employer/profile/fileupload")
   .post(isAuthenticated, profileFiles, employerProfileController.fileUpload);
 
 router
-  .route("/employer/profile/FileDelete/:id")
+  .route("/employer/profile/FileDelete/:fileId")
   .delete(isAuthenticated, employerProfileController.deleteFile);
 
 export default router;
