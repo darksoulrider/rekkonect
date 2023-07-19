@@ -98,6 +98,9 @@ const userSchema = new mongoose.Schema(
           "https://as2.ftcdn.net/v2/jpg/02/15/84/43/1000_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
       },
     },
+    verifyToken: {
+      type: String,
+    },
     isVerified: {
       type: Boolean,
       default: false,
@@ -119,7 +122,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "No user type given"],
     },
   },
-  { timestamps: false, validateBeforeSave: true }
+  { timestamps: true, validateBeforeSave: true }
 );
 
 //  write all the methods here regarding the schema before saving data

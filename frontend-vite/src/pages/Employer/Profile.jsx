@@ -35,7 +35,7 @@ const Profile = () => {
         <div className="cstm-top-imgs ">
           <img
             className="cstm-profile shadow-md"
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+            src={data.user.avatar.imageUrl}
             alt="Profile picture"
           />
           <h2 className="text-slate-900 font-bold">{data.user.companyName}</h2>
@@ -175,7 +175,7 @@ const Container = styled.div`
       >.cstm-profile {
         width: 8rem;
         height: 8rem;
-        background-size: cover;
+        object-fit: cover;
         border-radius: 50%;
         background-repeat: no-repeat;
         position:relative;

@@ -11,7 +11,8 @@ export const profileFiles = multer({
       cb(new ErrorHandler("No file given..", 400));
     } else if (
       file.mimetype.startsWith("image/") ||
-      file.mimetype.startsWith("video/")
+      file.mimetype.startsWith("video/") ||
+      file.mimetype === "application/pdf"
     ) {
       cb(null, true);
     } else {

@@ -5,10 +5,10 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { darkTheme, lightTheme } from './utils/Theme'
 import { useSelector, useDispatch } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+
 
 import Sidebar from './pages/Employer/components/Sidebar'
-
-
 
 // ******* Pages imported *********
 // import Mentordashboard from './pages/Mentor/dashboard'
@@ -26,6 +26,12 @@ import Jobs from './pages/Employer/Jobs'
 import Communication from './pages/Employer/communication'
 import Profile from './pages/Employer/Profile'
 import Candidate from './pages/Employer/Candidate'
+
+// ****** Protected routes ************
+import ProtectedRoutes from './utils/RoutesProtection/ProtectedRoutes'
+import UnAuthProtectedRoutes from './utils/RoutesProtection/UnAuthProtectedRoutes'
+
+
 const App = () => {
 
 
@@ -36,22 +42,38 @@ const App = () => {
     secondary: "#ff6400",
     tertiary: "#157499"
   }
-
+  let isAuth = true;
+  let usertype = "employer";
+  /*
+  -> 
+  get token and userType from cookies, which we are sending from backend
+  */
   return (
     <ThemeProvider theme={darkTheme} >
       <GlobalStyles />
       <Router>
 
         <Routes>
-          <Route path="/home" element={<GlobalDashboard />} />
-
-          <Route element={<EMP_Dashboard />}>
-            <Route index path='/connect' element={<Communication />} />
-            <Route path='/jobs' element={<Jobs />} />
-            <Route path='/candidates' element={<Candidate />} />
-            <Route path='/profile' element={<Profile />} />
-
+          {/* Un-Authenticated section  */}
+          <Route element={<UnAuthProtectedRoutes token={isAuth} userType={usertype} />}>
+            <Route path="/home" element={<GlobalDashboard />} />
+            <Route path='/login' element={<Login />} />
           </Route>
+
+
+          {/* employer dashboard */}\
+          <Route element={<ProtectedRoutes userType={usertype} cstmUserType={'employer'} token={isAuth} />}  >
+            <Route element={<EMP_Dashboard />}>
+              <Route path='/employer/profile' element={<Profile />} />
+              <Route path="/employer" element={<Navigate to="/employer/profile" />} />
+              <Route path='/employer/connect' element={<Communication />} />
+              <Route path='/employer/jobs' element={<Jobs />} />
+              <Route path='/employer/candidates' element={<Candidate />} />
+            </Route>
+          </Route>
+
+
+          {/* Similar way protect mentor and Employer by passing cstmuser and userType */}
 
 
         </Routes>

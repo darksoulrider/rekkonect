@@ -7,14 +7,34 @@ import EMP_Navbar from './components/EMP_Navbar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // this will have all the components and the outlets
+import { useGetProfileQuery } from '../../redux/apicall/employer/userProfile'
+
+
 const EMP_Dashboard = () => {
+  const { data, error, isLoading } = useGetProfileQuery(
+    undefined, {
+    refetchOnMountOrArgChange: true,
+  }
+  );
+
+
+
+  if (error) {
+    return <p style={{ color: "black" }}>Error: {error.message}</p>;
+  }
+
+  if (!data) {
+    return null; // or render a placeholder or loading state
+  }
+
+
   return (
     <Container className="flex ">
       <div className='sidebar' style={{ maxWidth: "30rem" }}>
         <Sidebar />
       </div>
       <div style={{ minWidth: "100%" }}>
-        <EMP_Navbar className='navbar' />
+        <EMP_Navbar userData={data.user} className='navbar' />
         <div className='outlet'>
           <Outlet />
         </div>

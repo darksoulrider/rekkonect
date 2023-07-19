@@ -14,25 +14,26 @@ const Sidebar = () => {
   const MENUS = [
     {
       title: 'Jobs',
-      to: '/jobs',
+      to: '/employer/jobs',
       icon: <MdWorkHistory />,
       // remember to make the route /employer/${title}
 
     },
     {
       title: 'Candidates',
-      to: '/candidates',
+      to: '/employer/candidates',
       icon: <FaUsers />,
     },
     {
       title: 'Connect',
-      to: '/connect',
+      to: '/employer/connect',
       icon: <MdConnectWithoutContact />,
     },
     {
       title: 'Profile',
-      to: '/profile',
+      to: '/employer/profile',
       icon: <RiUserSettingsFill />,
+      //  this /employer because of index property in router
     },
 
   ];
@@ -53,7 +54,7 @@ const Sidebar = () => {
       <div className={`cstm-layer transition-all duration-0 text-black bg-slate-200 shadow-xl h-screen `}>
         <div className="cstm-logo-arrow pt-10 px-10 flex">
 
-          <p onClick={() => navigate("/jobs")} className={`ctsm-logo-name text-orange-600 tracking-wider text-[2rem] lg:text-[2.5rem] font-bold cursor-pointer ${!isOpen ? "hidden" : ""} `}>Re<span className=' text-[rgb(21,116,153)]'>-Konnect</span>
+          <p onClick={() => navigate("/employer/profile")} className={`ctsm-logo-name text-orange-600 tracking-wider text-[2rem] lg:text-[2.5rem] font-bold cursor-pointer ${!isOpen ? "hidden" : ""} `}>Re<span className=' text-[rgb(21,116,153)]'>-Konnect</span>
           </p>
 
           <BsArrowLeftCircleFill onClick={() => SetisOpen(!isOpen)} className={`cstm-btn-arrow absolute  ${!isOpen ? "rotate-180" : ""} text-5xl text-orange-600 transition-all duration-100`} />

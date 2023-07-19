@@ -5,29 +5,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import sendToken from "../utils/sendtoken.js";
 import { userModal } from "../modal/userModal.js";
 import isGmail from "../utils/isGmail.js";
-// Register controllers
-// export const RegisterController = catchAsyncError(async (req, res, next) => {
-//   const {
-//     firstName,
-//     lastName,
-//     email,
-//     password,
-//     companyName,
-//     address,
-//     phoneNumber,
-//   } = req.body;
-//   if (email || !password)
-//     return next(new ErrorHandler("Please enter all fields", 404));
-//   let user = await userModal.findOne({ username: username });
-//   if (user) return next(new ErrorHandler("User already Exists..", 401));
 
-//   user = await userModal.create({
-//     email: email,
-//     password: password,
-//   });
-//   console.log(user);
-//   sendToken(res, user, "User Successfully registered..", 200);
-// });
 // ! handle login for email case sensitiveness
 export const RegisterEmployer = catchAsyncError(async (req, res, next) => {
   // ! write logic for terms acceptance - [required]
@@ -81,38 +59,28 @@ export const RegisterEmployer = catchAsyncError(async (req, res, next) => {
   sendToken(res, user, "User Successfully registered..", 200);
 });
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// loign controllers
-// export const LoginController = catchAsyncError(async (req, res, next) => {
-//   const { username, password } = req.body;
-//   if (!username || !password) {
-//     return next(new ErrorHandler("Please Enter all field..", 400));
-//   }
-//   const user = await UserModel.findOne({ username: username }).select(
-//     "+password"
-//   );
-//   if (!user) {
-//     return next(new ErrorHandler("Username or password is incorrect", 404));
-//   }
+// ************** loign controllers **************
 
-//   const isMatch = user.comparePassword(password);
-//   if (!isMatch) {
-//     return next(new ErrorHandler("Username or password is incorrect", 404));
-//   }
-//   console.log(user);
-//   sendToken(res, user, "Successfully loged in..", 200);
-// });
+export const LoginController = catchAsyncError(async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return next(new ErrorHandler("Please Enter all field..", 400));
+  }
+
+  const user = await userModal.findOne({ email: email }).select("+password");
+
+  if (!user) {
+    return next(new ErrorHandler("Username or password is incorrect", 404));
+  }
+
+  const isMatch = await user.comparePassword(password);
+  console.log(isMatch);
+  if (!isMatch) {
+    return next(new ErrorHandler("Username or password is incorrect", 404));
+  }
+
+  sendToken(res, user, "Successfully loged in..", 200);
+});
 
 export const GoogleLogin = catchAsyncError(async (req, res, next) => {});
 export const FacebookLogin = catchAsyncError(async (req, res, next) => {});

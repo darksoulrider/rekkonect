@@ -18,25 +18,26 @@ const app = express();
 
 app.use(
   cors({
-    origin: "*",
+    origin: ["http://127.0.0.1:3000", "http://localhost:3000"],
+    // origin: "http://localhost:3000",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
-app.use(cookieParser());
-app.use(express.json({ limit: "30mb", extended: true }));
-app.use(express.urlencoded({ limit: "30mb", extended: true }));
+app.use(express.json({ limit: "50mb", extended: true }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("dev"));
 
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use(cookieParser());
 
 // ***** Request routes setup ***********
 import userRotues from "./routes/userRoutes.js";
 import employeRoutes from "./routes/employerRoutes.js";
-app.use("/api/", userRotues);
-app.use("/api/", employeRoutes);
+app.use("/api", userRotues);
+app.use("/api", employeRoutes);
 
 // ******** Only for test purpose *************
 const data = [

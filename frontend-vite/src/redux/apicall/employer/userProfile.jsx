@@ -48,6 +48,54 @@ export const userEmployerProfile = createApi({
                 body: whydata,
             }),
             invalidatesTags: ['additionalInfo']
+        }),
+        sendRecommend: builder.mutation({
+            query: (recommend) => ({
+                url: `/employer/profile/recommend`,
+                method: 'POST',
+                body: recommend,
+            }),
+            invalidatesTags: ['additionalInfo']
+        }),
+        sendHeadQuarter: builder.mutation({
+            query: (quarter) => ({
+                url: `/employer/profile/headquarter`,
+                method: 'POST',
+                body: quarter,
+            }),
+            invalidatesTags: ['additionalInfo']
+        }),
+        sendWebsite: builder.mutation({
+            query: (website) => ({
+                url: `/employer/profile/website`,
+                method: 'POST',
+                body: website,
+            }),
+            invalidatesTags: ['additionalInfo']
+        }),
+        sendSocial: builder.mutation({
+            query: (link) => ({
+                url: `/employer/profile/addsocial`,
+                method: 'POST',
+                body: link,
+            }),
+            invalidatesTags: ['additionalInfo']
+        }),
+        changSocailLink: builder.mutation({
+            query: ({ id, link }) => ({
+                url: `/employer/profile/editsocial/${id}`,
+                method: 'PUT',
+                body: link,
+            }),
+            invalidatesTags: ['additionalInfo']
+        }),
+        deletLink: builder.mutation({
+            query: ({ id }) => ({
+                url: `/employer/profile/deletesocial/${id}`,
+                method: 'DELETE',
+
+            }),
+            invalidatesTags: ['additionalInfo']
         })
 
     }),
@@ -62,4 +110,10 @@ export const {
     useUploadFileMutation,
     useDeleteFileMutation,
     useSendwhyMutation,
+    useSendRecommendMutation,
+    useSendHeadQuarterMutation,
+    useSendWebsiteMutation,
+    useSendSocialMutation,
+    useChangSocailLinkMutation,
+    useDeletLinkMutation,
 } = userEmployerProfile;

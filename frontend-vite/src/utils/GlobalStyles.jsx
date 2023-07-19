@@ -50,7 +50,7 @@ const GlobalStyles = createGlobalStyle`
         text-transform: uppercase;
         letter-spacing: 0.2rem;
         margin: 2rem 0;
-        transition : 500ms;
+        transition : 200ms;
         outline: none;
         border-style: none;
     }

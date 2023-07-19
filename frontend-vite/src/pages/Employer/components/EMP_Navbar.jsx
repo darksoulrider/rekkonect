@@ -4,14 +4,19 @@ import { MdNotifications } from "react-icons/md";
 import Logo from "/assets/images/profile.png";
 import { useState } from "react";
 import { Menu } from "@headlessui/react";
-import {IoMdArrowDropdown} from "react-icons/io"
+import { IoMdArrowDropdown } from "react-icons/io"
 
-const EMP_Navbar = () => {
+
+
+
+
+const EMP_Navbar = ({ userData }) => {
+
+
   const [isDropDown, setIsDropDown] = useState(false);
-  const l = "https://plus.unsplash.com/premium_photo-1675034393497-86e6970d2f49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80";
 
 
-  const logout = () =>{
+  const logout = () => {
     window.alert("logout clicked");
     setIsDropDown(!isDropDown);
   }
@@ -20,24 +25,25 @@ const EMP_Navbar = () => {
       <div>
         {/* <MdNotifications className={`cstm-notification`} /> */}
       </div>
-      <div className={`cstm-profile-layer flex items-center`} onClick={()=>{setIsDropDown(!isDropDown)}} >
+      <div className={`cstm-profile-layer flex items-center`} onClick={() => { setIsDropDown(!isDropDown) }} >
         <div className="w-20 rounded-full shadow-2xl ">
           <img
-            src={l}
+            src={userData.avatar.imageUrl}
             alt="profile"
-            className="w-20 h-20 shadow-lg bg-cover rounded-full"
+            style={{ objectFit: 'cover' }}
+            className="w-20 h-20 shadow-lg rounded-full"
           />
         </div>
         <div>
           <IoMdArrowDropdown className={`text-3xl`} />
         </div>
       </div>
-      {(isDropDown ? 
-      <div className="cstm-drop-logout items-center  bg-slate-500 00 transition-all duration-100 absolute justify-center flex text-white">
+      {(isDropDown ?
+        <div className="cstm-drop-logout items-center  bg-slate-500 00 transition-all duration-100 absolute justify-center flex text-white">
           <div onClick={logout} className="bg-orange-600 px-4 py-1 rounded-md tracking-wider " >
-            <p className="font-bold">Logout</p>
+            <p className="cursor-pointer font-bold">Logout</p>
           </div>
-      </div>:"")}
+        </div> : "")}
     </Container>
   );
 };
@@ -45,7 +51,7 @@ const EMP_Navbar = () => {
 export default EMP_Navbar;
 
 const Container = styled.div`
-  @media (max-width: ${props => props.theme.isMobile }) {
+  @media (max-width: ${props => props.theme.isMobile}) {
     .cstm-layer{
       
     }
@@ -64,8 +70,13 @@ const Container = styled.div`
       border-radius:2.1rem 0rem 1.3rem 0.3rem;
 
     }
+    .cstm-profile-layer{
+      position: absolute;
+      /* margin-right: 15rem; */
+      right:6rem;
+    }
   }
-  @media (min-width: ${props => props.theme.isMobile }) and (max-width: ${props => props.theme.isTab }) 
+  @media (min-width: ${props => props.theme.isMobile}) and (max-width: ${props => props.theme.isTab}) 
   {
     /* position: fixed; */
     position: fixed;
@@ -84,9 +95,14 @@ const Container = styled.div`
       font-size: 1.3rem;
       border-radius:2.1rem 0rem 1.3rem 0.3rem;
     }
+    .cstm-profile-layer{
+      position: absolute;
+      /* margin-right: 15rem; */
+      right:6rem;
+    }
     
   }
-  @media (min-width: ${props => props.theme.isTab }) and (max-width: ${props => props.theme.isDesktop }) {
+  @media (min-width: ${props => props.theme.isTab}) and (max-width: ${props => props.theme.isDesktop}) {
 
 
     position: fixed;

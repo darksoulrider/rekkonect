@@ -12,7 +12,8 @@ import mongoose from "mongoose";
 export const UpdateEmployerPersonalInfo = catchAsyncError(
   async (req, res, next) => {
     // ! dont trust user given in body email , take out email from jwt and then do search result
-    console.log(req.body);
+
+    // ! dont let the user to update email address
 
     let user = await userModal.findOne({
       email: req.email,
@@ -20,9 +21,10 @@ export const UpdateEmployerPersonalInfo = catchAsyncError(
     });
     if (!user) return next(new ErrorHandler("User not found", 404));
 
+    // perposefully not taking email address to update [ or send email verification then ]
+    // user.email = req.body.email || user.email;
     user.firstName = req.body.firstName || user.firstName;
     user.lastName = req.body.lastName || user.lastName;
-    user.email = req.body.email || user.email;
     user.phoneNumber = req.body.contact || user.phoneNumber;
     user.companyName = req.body.companyName || user.companyName;
     user.birthdate = req.body.birthDate || user.birthdate;
@@ -74,44 +76,11 @@ export const getAdditionalInfo = catchAsyncError(async (req, res, next) => {
   });
 });
 
-export const addAdditionalInfo = catchAsyncError(async (req, res, next) => {
-  const { aboutCompany, mentor } = req.body;
-  const _id = req.id;
-  const email = req.email;
-  const userType = req.userType;
-
-  let user = await userModal.findOne({ email: email, userType: userType });
-
-  if (!user) return next(new ErrorHandler("UnAuthorized access", 400));
-
-  let info = await AdditionalInfoModel.findOne({ user: _id });
-
-  if (info) {
-    info.aboutCompany = aboutCompany || info.aboutCompany;
-    if (!info.recommendedMentor.includes(mentor)) {
-      info.recommendeMentor.push(mentor);
-    }
-    await info.save();
-  } else {
-    info = await AdditionalInfoModel.create({
-      aboutCompany: aboutCompany,
-      user: req.id,
-      recommendedMentor: mentor,
-    });
-  }
-
-  res.status(201).json({
-    success: true,
-    info,
-  });
-});
-
 //  ********** Send why ? [ about company ] ***************
 
 export const whyinfo = catchAsyncError(async (req, res, next) => {
   const { why } = req.body;
   const { id, userType, email } = req; // token
-  console.log(`req.body => ${req.body.why}`);
 
   let info = await AdditionalInfoModel.findOne({ user: id });
   if (info) {
@@ -128,6 +97,174 @@ export const whyinfo = catchAsyncError(async (req, res, next) => {
     success: true,
     info,
   });
+});
+
+//  ************** employer Send Recommend Mentor ****************************
+
+export const recommendMentor = catchAsyncError(async (req, res, next) => {
+  const { id, userType, email, user } = req;
+  const { recommend } = req.body;
+
+  let info = await AdditionalInfoModel.findOne({ user: id });
+  if (info) {
+    if (!info.recommendMentor.includes(recommend)) {
+      info.recommendMentor.push(recommend);
+      await info.save();
+    } else {
+      return next(new ErrorHandler("Mentor already recommended", 400));
+    }
+  } else {
+    info = await AdditionalInfoModel.create({
+      recommendMentor: recommend,
+      user: id,
+    });
+  }
+
+  res.status(200).json({
+    status: true,
+    info,
+  });
+});
+
+//  *********** Employer headquerter send ***********
+export const sendHeadquerter = catchAsyncError(async (req, res, next) => {
+  const { id, userType, email, user } = req;
+  const { headquarter } = req.body;
+
+  let info = await AdditionalInfoModel.findOne({ user: id });
+  if (info) {
+    info.headquarter = headquarter || info.headquarter;
+    await info.save();
+  } else {
+    info = await AdditionalInfoModel.create({
+      headquarter: headquarter,
+      user: id,
+    });
+  }
+
+  res.status(200).json({
+    status: true,
+    info,
+  });
+});
+
+//  *********** Employer website send ***********
+export const sendWebsite = catchAsyncError(async (req, res, next) => {
+  const { id, email, userType, user } = req;
+  const { website } = req.body;
+  if (website.includes(" ")) {
+    return next(new ErrorHandler("Invalid website.", 400));
+  }
+  let info = await AdditionalInfoModel.findOne({ user: id });
+  if (info) {
+    info.website = website || info.website;
+    await info.save();
+  } else {
+    info = await AdditionalInfoModel.create({
+      website: website,
+      user: id,
+    });
+  }
+
+  res.status(200).json({
+    status: true,
+    info,
+  });
+});
+
+// ******** Employer Social Account [ add ] **********
+export const addSocialAccount = catchAsyncError(async (req, res, next) => {
+  const { id, user, email, userType } = req;
+  const { socialAccount } = req.body;
+  if (socialAccount.includes(" ")) {
+    return next(new ErrorHandler("Invalid link...", 400));
+  }
+
+  let info = await AdditionalInfoModel.findOne({ user: id });
+
+  if (info) {
+    const isLinkExist = info.socialMedia.some((link) => {
+      return link.link === socialAccount;
+    });
+    if (isLinkExist) {
+      return next(new ErrorHandler("Social Account already exist", 400));
+    }
+    info.socialMedia.push({ link: socialAccount });
+    await info.save();
+  } else {
+    info = await AdditionalInfoModel.create({
+      socialMedia: [{ link: socialAccount }],
+      user: id,
+    });
+  }
+
+  res.status(200).json({
+    status: true,
+    info,
+  });
+});
+
+//  ******** edit links **********
+
+export const editsociallinks = catchAsyncError(async (req, res, next) => {
+  const { id, user, userType, email } = req;
+  const link_id = req.params.id;
+  const { Changedlink } = req.body;
+  console.log(`Link ${link_id} || changedlink ${Changedlink}`);
+  if (Changedlink.includes(" ")) {
+    return next(new ErrorHandler("Invalid link...", 400));
+  }
+
+  const check_link = await AdditionalInfoModel.findOne({ user: id });
+  const isExist = check_link.socialMedia.some((link) =>
+    link._id.equals(link_id)
+  );
+
+  if (!isExist) return next(new ErrorHandler("link does not exist"));
+
+  let info = await AdditionalInfoModel.findOneAndUpdate(
+    { user: id, "socialMedia._id": link_id },
+    { $set: { "socialMedia.$.link": Changedlink } },
+    { new: true }
+  );
+
+  if (!info) return next(new ErrorHandler("not changed.. ", 400));
+
+  res.status(200).json({
+    success: true,
+    message: "changed successfully",
+    info,
+  });
+});
+
+//   ******* Delete links ********
+
+export const deleteSocialAccount = catchAsyncError(async (req, res, next) => {
+  const { id, user, userType, email } = req;
+  const link_id = req.params.id;
+
+  const check_link = await AdditionalInfoModel.findOne({ user: id });
+  const isExist = check_link.socialMedia.some((link) =>
+    link._id.equals(link_id)
+  );
+
+  if (!isExist) return next(new ErrorHandler("link does not exist"));
+
+  let info = await AdditionalInfoModel.findOneAndUpdate(
+    { user: id },
+    { $pull: { socialMedia: { _id: link_id } } },
+    { new: true }
+  );
+
+  if (!info) return next(new ErrorHandler("not deleted ", 400));
+
+  res.status(200).json({
+    success: true,
+    message: "deleted successfully",
+    info,
+  });
+
+  // ! -- Complete this --
 });
 
 // ************** Employer files upload ********

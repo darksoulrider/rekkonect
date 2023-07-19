@@ -1,19 +1,25 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { MainUrl } from './GlobalRoutes'
 
-export const pokemonApi = createApi({
-  reducerPath: 'pokemonApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
+export const Authentication = createApi({
+  reducerPath: 'authentication',
+  baseQuery: fetchBaseQuery({
+    baseUrl: MainUrl,
+
+  }),
   endpoints: (builder) => ({
-    getPokemonByName: builder.query({
-      query: (name) => `/products/${name}`,
-    }),
-    UserData: builder.query({
-      query: () => `/test`
+    login: builder.mutation({
+      query: (data) => ({
+        url: `/login`,
+        method: 'POST',
+        body: data,
+        credentials: 'include',
+      })
     })
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetPokemonByNameQuery, useUserDataQuery } = pokemonApi
+export const { useLoginMutation } = Authentication

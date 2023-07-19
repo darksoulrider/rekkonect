@@ -15,12 +15,26 @@ const AdditionalInfoSchema = new mongoose.Schema({
   headquarter: {
     type: String,
   },
-  companyWebiste: {
+  website: {
     type: String,
+    minLength: [6, "minimum 6 characters required"],
   },
   recommendMentor: [
     {
       type: String,
+      required: [true, "recommend email required"],
+      validate: [validator.isEmail, "Email address is not valid"],
+      //  you can minLength if you want
+    },
+  ],
+  socialMedia: [
+    {
+      link: {
+        type: String,
+        required: [true, "Social link required"],
+        unique: true,
+        minLength: [6, "Minimum 6 characters required"],
+      },
     },
   ],
   files: [

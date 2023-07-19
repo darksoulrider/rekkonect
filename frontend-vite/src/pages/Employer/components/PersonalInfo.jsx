@@ -55,7 +55,6 @@ const PersonalInfo = ({ userdata }) => {
             title: "Email",
             placeholder: "E-mail",
             register: "email",
-
         },
         {
             title: "FirstName",
@@ -127,7 +126,8 @@ const PersonalInfo = ({ userdata }) => {
                                 // style={{ color: "black", fontSize: "1.1rem", marginBottom: "1rem" }}
                                 <div key={item.title}>
                                     <p className='cstm-title'>{item.title}</p>
-                                    <input type={`${item.title === "BirthDate" ? "date" : "text"}`} className='text-black shadow-md' placeholder={item.placeholder} disabled={!isEdit}  {...register(item.register)}
+                                    <input
+                                        type={`${item.title === "BirthDate" ? "date" : "text"}`} className='text-black shadow-md' placeholder={item.placeholder} disabled={!isEdit}  {...register(item.register)}
                                     />
                                 </div>
                             )
@@ -205,10 +205,7 @@ const Container = styled.div`
             >div>input{
                 border: 1px solid rgba(2,1,2,0.5);
                 margin-bottom:1.5rem;
-                /* background-color: #f9f6f6;/ */
                 background-color: #fdfcfc;
-                
-                
             }
             .cstm-title{
                 color: #252424;

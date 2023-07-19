@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/checkstate"
 import themeReducer from "./slices/ThemeSlice"
 import helperReducer from "./slices/helper";
-import { pokemonApi } from "./apicall/auth";
+import { Authentication } from "./apicall/auth";
 import { combineReducers } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage"
 
@@ -10,8 +10,6 @@ import storage from "redux-persist/lib/storage"
 // *** RTK QUERY API CALLS ** [ DO NOT MAKE THEM PERSISTANT ] ***
 
 import { userEmployerProfile } from "./apicall/employer/userProfile";
-
-
 
 import {
   persistReducer,
@@ -26,7 +24,6 @@ import {
 // add here to persist data [ do not add RTKquery ]
 const reducers = combineReducers({
   Theme: themeReducer,
-
 })
 
 
@@ -44,6 +41,7 @@ const Store = configureStore({
   reducer: {
     persistState: persistedReducer,
     helper: helperReducer,
+    [Authentication.reducerPath]: Authentication.reducer,
     [userEmployerProfile.reducerPath]: userEmployerProfile.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -54,6 +52,7 @@ const Store = configureStore({
     }).concat(
       [
         userEmployerProfile.middleware,
+        Authentication.middleware,
       ]),
 });
 

@@ -8,9 +8,10 @@ import * as employerProfileController from "../controller/employer/employerUserP
 import { isAuthenticated } from "../middleware/isAuthenticated.js";
 
 // Authentication  -> controllers
-// router.route("/login").post(userController.LoginController);
+router.route("/login").post(userController.LoginController);
 // router.route("/signup").post(userController.RegisterController);
 router.route("/employer/signup").post(userController.RegisterEmployer);
+
 // router.route("/signupWithGoogle").post(userController.GoogleLogin);
 // router.route("/signupWithFacebook").post(userController.FacebookLogin);
 
