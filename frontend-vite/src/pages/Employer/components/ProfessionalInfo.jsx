@@ -284,7 +284,7 @@ const ProfessionalInfo = ({ userdata }) => {
                 </div>
             </div>
             <div className='cstm-recommend-layer ml-20 '>
-                <p className="text-2xl tracking-wider mb-5">Recommend Mentor</p>
+                <p className="text-2xl tracking-wider mb-1">Recommend Mentor</p>
                 <div className="cstm-recommend ">
                     <input onChange={(e) => Setrecommend(e.target.value)} value={recommend} placeholder='Enter email  ' className="text-gray-700" />
                     <button onClick={() => sendRecommend()} className=''>Recommend</button>
