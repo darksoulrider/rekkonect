@@ -21,7 +21,7 @@ const EMP_Navbar = ({ userData }) => {
     setIsDropDown(!isDropDown);
   }
   return (
-    <Container className="cstm-layer pr-5  h-28 flex justify-end  text-black bg-slate-200 items-center gap-3">
+    <Container className="cstm-layer pr-5  h-28 flex justify-end  text-black bg-slate-100 items-center gap-3">
       <div>
         {/* <MdNotifications className={`cstm-notification`} /> */}
       </div>
@@ -39,7 +39,7 @@ const EMP_Navbar = ({ userData }) => {
         </div>
       </div>
       {(isDropDown ?
-        <div className="cstm-drop-logout items-center  bg-slate-500 00 transition-all duration-100 absolute justify-center flex text-white">
+        <div className="cstm-drop-logout items-center  bg-slate-200 00 transition-all duration-100 absolute justify-center flex text-white">
           <div onClick={logout} className="bg-orange-600 px-4 py-1 rounded-md tracking-wider " >
             <p className="cursor-pointer font-bold">Logout</p>
           </div>

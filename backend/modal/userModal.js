@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
+import ErrorHandler from "../utils/errorHandler.js";
 
 const userRoles = ["candidate", "mentor", "employer"];
 
@@ -69,10 +70,10 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     address: {
-      // can be considered as company address / candidate / mentor
       state: {
         type: String,
         required: [true, "State value is required"],
+        minLength: [4, "State characters must be 4"],
       },
       city: {
         type: String,
@@ -83,8 +84,16 @@ const userSchema = new mongoose.Schema(
         required: [true, "Landmark value is required"],
       },
       pinCode: {
-        type: Number,
-        required: [true, "Pincode value is required"],
+        type: String,
+        required: [true, "pincode value is required"],
+        minLength: [6, "Pincode characters must be 6"],
+        validate: {
+          validator: (value) => {
+            if (!validator.isNumeric(value)) {
+              throw new Error("Pin code must be numeric value");
+            }
+          },
+        },
       },
     },
     avatar: {
@@ -122,7 +131,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "No user type given"],
     },
   },
-  { timestamps: true, validateBeforeSave: true }
+  { validateBeforeSave: true, timestamps: true }
 );
 
 //  write all the methods here regarding the schema before saving data

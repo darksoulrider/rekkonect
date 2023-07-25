@@ -17,7 +17,7 @@ export const SignupValidatinSchema = yup.object().shape({
 
 
 // ! change this to employer heading
-export const UpdatePersonal_MentorInfo = yup.object().shape({
+export const Emp_Personalinfo = yup.object().shape({
     firstName: yup.string().min(2, "Minimum 2 characters required").required("First name is required").typeError("Firstname should be string"),
     lastName: yup.string().min(2, "Minimum 2 characters required").required("Last name is required").typeError("Lastname should be string"),
     email: yup.string().email().required("Please enter your email"),
@@ -27,5 +27,5 @@ export const UpdatePersonal_MentorInfo = yup.object().shape({
     state: yup.string().required("Please enter state"),
     city: yup.string().required("Please enter city"),
     landmark: yup.string().required("Please enter landmark"),
-    pinCode: yup.number().required("Please enter pin code").typeError("Pin code must be a number"),
+    pinCode: yup.number().min(6, 'minimum 6 number required').required("Please enter pin code").typeError("Pin code must be a number")
 })

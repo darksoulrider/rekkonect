@@ -11,33 +11,24 @@ import { rmSync } from "fs";
 import mongoose from "mongoose";
 export const UpdateEmployerPersonalInfo = catchAsyncError(
   async (req, res, next) => {
-    // ! dont trust user given in body email , take out email from jwt and then do search result
+    let { user, email, userType, id } = req;
+    let da = req.body;
 
-    // ! dont let the user to update email address
-
-    let user = await userModal.findOne({
-      email: req.email,
-      userType: req.userType,
-    });
-    if (!user) return next(new ErrorHandler("User not found", 404));
-
-    // perposefully not taking email address to update [ or send email verification then ]
-    // user.email = req.body.email || user.email;
-    user.firstName = req.body.firstName || user.firstName;
-    user.lastName = req.body.lastName || user.lastName;
-    user.phoneNumber = req.body.contact || user.phoneNumber;
-    user.companyName = req.body.companyName || user.companyName;
-    user.birthdate = req.body.birthDate || user.birthdate;
-    user.address.state = req.body.state || user.address.state;
-    user.address.city = req.body.city || user.address.city;
-    user.address.landMark = req.body.landMark || user.address.landMark;
-    user.address.pinCode = req.body.pinCode || user.address.pinCode;
-
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.phoneNumber = req.body.contact;
+    user.companyName = req.body.companyName;
+    user.birthdate = req.body.birthDate;
+    user.address.state = req.body.state;
+    user.address.city = req.body.city;
+    user.address.landMark = req.body.landmark;
+    user.address.pinCode = req.body.pinCode;
+    await user.validate();
     user = await user.save();
 
     res.status(200).json({
       success: true,
-      data: "Updating employer information",
+      data: "updated employer information",
       user,
     });
   }

@@ -1,14 +1,24 @@
 import mongoose, { mongo } from "mongoose";
 import jwt from "jsonwebtoken";
 import validator from "validator";
-import { industryType } from "./industryType";
+import { industryType } from "./industryType.js";
+
+const days = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+];
+
 const Emp_JobsModel = new mongoose.Schema(
   {
     user: {
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: [true, "User reference is required"],
-      unique: true,
     },
     title: {
       type: String,
@@ -19,41 +29,75 @@ const Emp_JobsModel = new mongoose.Schema(
     designation: {
       type: String,
       required: [true, "designation is required"],
+      minLength: [4, "minimum 4 characters is required"],
     },
-    reportingTo: {
+    reportingto: {
       type: String,
       required: [true, "reporting is required"],
+      minLength: [2, "minimum 2 characters is required"],
     },
-    companyName: {
+    companyname: {
       type: String,
       required: [true, "company name is required"],
+      minLength: [4, "minimum 4 characters is required"],
     },
     description: {
       type: String,
       required: [true, "description is required"],
+      minLength: [15, "minimum 15 characters is required"],
     },
-    jobType: {
+    jobtype: {
       type: String,
-      enum: ["fulltime", "internship", "Gig", "part time", "project based"],
+      enum: {
+        values: [
+          "full time",
+          "internship",
+          "gig",
+          "part time",
+          "project based",
+        ],
+        message: "jobtype is not valid",
+      },
+      required: [true, "jobtype is required"],
     },
     location: {
       type: String,
-      enum: ["remote", "hybrid", "on-site"],
+      enum: ["Remote", "Hybrid", "On-site"],
+      required: [true, "location is required"],
     },
-    workDays: {
-      firstDay: {
+    workdays: {
+      firstday: {
         type: String,
+        enum: {
+          values: days,
+          message: "No days matched.",
+        },
         required: [true, "startDay required"],
       },
-      lastDay: {
+      lastday: {
         type: String,
+        enum: {
+          values: days,
+          message: "No days matched.",
+        },
         required: [true, "startDay required"],
       },
     },
     compensation: {
       salary: {
-        type: Number,
+        type: String,
         required: [true, "salary required"],
+        min: [0, "min required 0 value required"],
+        validate: {
+          validator: (value) => {
+            if (!validator.isNumeric(value)) {
+              throw new Error("Only integers required.");
+            }
+            if (value < 0) {
+              throw new Error("No negative integers allowed.");
+            }
+          },
+        },
       },
       benefits: {
         type: String,
@@ -69,23 +113,50 @@ const Emp_JobsModel = new mongoose.Schema(
         message: "Contact should be a valid email or phone number",
       },
     },
-    industryType: {
+    industrytype: {
       type: String,
-      enum: industryType,
+      required: [true, "industry type required"],
+      // enum: industryType,
+      // see we need  enum or trust frontend or allow other strinng as well
     },
     qualification: {
       type: String,
-      required: [true, "Qualification"],
+      required: [true, "Qualification is required "],
     },
-    skillsRequired: {},
+    skills: {
+      type: String,
+      required: [true, "Skils is required"],
+      minLength: [2, "minimum 2 characters required"],
+    },
+    experience: {
+      type: String,
+      required: [true, "Skills are required"],
+      // validate: {
+      //   validator: (value) => {
+      //     if (!validator.isNumeric(value)) {
+      //       throw new Error("Only integers required.");
+      //     }
+      //   },
+      // },
+    },
     deadline: {
-      /* */
+      type: Date,
+      required: [true, "Deadline for the job is required "],
+      validate: {
+        validator: (value) => {
+          const d = new Date();
+          if (value < d) {
+            throw new Error("Date should not represent past");
+          }
+        },
+      },
     },
     isStatus: {
-      /* active or not*/
+      type: Boolean,
+      default: true,
     },
-    responsibility: {},
-    assignTask: {
+    assigntask: {
+      type: String,
       // not sure
     },
     applicants: [
@@ -93,7 +164,10 @@ const Emp_JobsModel = new mongoose.Schema(
         type: mongoose.Types.ObjectId,
         ref: "User",
         required: [true, "User reference is required"],
-        unique: true,
+        // validate: {
+        //   validator: (value) => {},
+        //   // check any applicants exist before doing this
+        // },
       },
     ],
   },

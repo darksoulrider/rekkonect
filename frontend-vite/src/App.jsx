@@ -26,15 +26,14 @@ import Jobs from './pages/Employer/Jobs'
 import Communication from './pages/Employer/communication'
 import Profile from './pages/Employer/Profile'
 import Candidate from './pages/Employer/Candidate'
-
+import CreateJob from './pages/Employer/components/CreateJob'
+import Editjob from './pages/Employer/components/Editjob'
 // ****** Protected routes ************
 import ProtectedRoutes from './utils/RoutesProtection/ProtectedRoutes'
 import UnAuthProtectedRoutes from './utils/RoutesProtection/UnAuthProtectedRoutes'
 
 
 const App = () => {
-
-
 
 
   const data = {
@@ -68,6 +67,8 @@ const App = () => {
               <Route path="/employer" element={<Navigate to="/employer/profile" />} />
               <Route path='/employer/connect' element={<Communication />} />
               <Route path='/employer/jobs' element={<Jobs />} />
+              <Route path='/employer/jobs/create' element={<CreateJob />} />
+              <Route path='/employer/jobs/edit/:id' element={<Editjob />} />
               <Route path='/employer/candidates' element={<Candidate />} />
             </Route>
           </Route>

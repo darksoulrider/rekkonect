@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./slices/checkstate"
 import themeReducer from "./slices/ThemeSlice"
 import helperReducer from "./slices/helper";
 import { Authentication } from "./apicall/auth";
@@ -10,7 +9,7 @@ import storage from "redux-persist/lib/storage"
 // *** RTK QUERY API CALLS ** [ DO NOT MAKE THEM PERSISTANT ] ***
 
 import { userEmployerProfile } from "./apicall/employer/userProfile";
-
+import { Emp_JobAPI } from "./apicall/employer/Emp_JobAPI";
 import {
   persistReducer,
   FLUSH,
@@ -43,6 +42,7 @@ const Store = configureStore({
     helper: helperReducer,
     [Authentication.reducerPath]: Authentication.reducer,
     [userEmployerProfile.reducerPath]: userEmployerProfile.reducer,
+    [Emp_JobAPI.reducerPath]: Emp_JobAPI.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -53,6 +53,7 @@ const Store = configureStore({
       [
         userEmployerProfile.middleware,
         Authentication.middleware,
+        Emp_JobAPI.middleware,
       ]),
 });
 

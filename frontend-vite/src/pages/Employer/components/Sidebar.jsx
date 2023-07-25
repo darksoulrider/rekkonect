@@ -51,7 +51,7 @@ const Sidebar = () => {
 
 
     <Container $isOpen={isOpen}>
-      <div className={`cstm-layer transition-all duration-0 text-black bg-slate-200 shadow-xl h-screen `}>
+      <div className={`cstm-layer transition-all duration-0 text-black bg-slate-100 shadow-xl h-screen `}>
         <div className="cstm-logo-arrow pt-10 px-10 flex">
 
           <p onClick={() => navigate("/employer/profile")} className={`ctsm-logo-name text-orange-600 tracking-wider text-[2rem] lg:text-[2.5rem] font-bold cursor-pointer ${!isOpen ? "hidden" : ""} `}>Re<span className=' text-[rgb(21,116,153)]'>-Konnect</span>

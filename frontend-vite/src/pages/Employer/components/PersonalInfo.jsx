@@ -3,11 +3,12 @@ import styled from "styled-components"
 import { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { UpdatePersonal_MentorInfo } from '../../../utils/YupValidation'
+import { Emp_Personalinfo } from "../../../utils/YupValidation"
 import { useUpdateProfileMutation } from '../../../redux/apicall/employer/userProfile'
-
+import { toast } from "react-toastify"
 const PersonalInfo = ({ userdata }) => {
     const [isEdit, SetIsEdit] = useState(false);
+
     const handleClickEvent = (e) => {
         e.preventDefault();
         SetIsEdit(!isEdit);
@@ -20,7 +21,7 @@ const PersonalInfo = ({ userdata }) => {
     }
 
     const { register, handleSubmit, formState: { errors }, } = useForm({
-        resolver: yupResolver(UpdatePersonal_MentorInfo),
+        resolver: yupResolver(Emp_Personalinfo),
         defaultValues: {
             firstName: userdata?.user?.firstName || '',
             lastName: userdata?.user?.lastName || '',
@@ -38,11 +39,20 @@ const PersonalInfo = ({ userdata }) => {
     });
 
     const updateProfile = async (data) => {
-        const see = await update(data);
-        SetIsEdit(!isEdit);
+        try {
+
+            const see = await update(data);
+            console.log(data);
+            SetIsEdit(!isEdit);
+        } catch (e) {
+            // consle.log(e.message);
+        }
         //  if success we can show toast here
     }
-
+    const showError = (err) => {
+        //  just for ui breaks when used in loop [ it shows count in form]
+        toast.error(err)
+    }
 
     const inputData = [
         {
@@ -122,6 +132,7 @@ const PersonalInfo = ({ userdata }) => {
                 <div>
                     <div className="cstm-form " >
                         {inputData.map((item) => {
+                            const er = item.register;
                             return (
                                 // style={{ color: "black", fontSize: "1.1rem", marginBottom: "1rem" }}
                                 <div key={item.title}>
@@ -129,6 +140,9 @@ const PersonalInfo = ({ userdata }) => {
                                     <input
                                         type={`${item.title === "BirthDate" ? "date" : "text"}`} className='text-black shadow-md' placeholder={item.placeholder} disabled={!isEdit}  {...register(item.register)}
                                     />
+
+                                    {errors[er] && showError(`${er} - ${errors[er].message}`)}
+
                                 </div>
                             )
                         })}

@@ -4,7 +4,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import { userModal } from "../modal/userModal.js";
 export const isAuthenticated = catchAsyncError(async (req, res, next) => {
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI1NzI4MWQ0MzBkMDY5MDY5MDAzMzciLCJ1c2VyVHlwZSI6ImVtcGxveWVyIiwiZW1haWwiOiJtYWNrQG1hY2suY29tIiwiaWF0IjoxNjg5NjgxNDY4LCJleHAiOjE2OTAxMTM0Njh9.Q0jVvxrs_7jalg3-0aXw1ciIlnVoOmiJ6kc507P7rtM";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGJkNGRkMDg2N2JhZWE4NzBlZDE3NzkiLCJ1c2VyVHlwZSI6ImVtcGxveWVyIiwiZW1haWwiOiJ0ZXN0aW5nMkBtYWNrLmNvbSIsImlhdCI6MTY5MDEyNzgyNSwiZXhwIjoxNjkwNTU5ODI1fQ.3d1F56uH7jfYaI69J_WgiRC8pah9RrZCcC5tGCfzQEY";
 
   console.log("hit this isAuthentticated");
   if (!token) {

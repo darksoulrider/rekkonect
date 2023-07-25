@@ -1,12 +1,13 @@
 import express from "express";
 const router = express.Router();
 import { profileFiles } from "../middleware/multerMiddleware.js";
-// ***  importing the controllers ***
 
+// ***  importing the controllers ***
 import * as employerProfileController from "../controller/employer/employerUserProfile.js";
+import * as employerJobController from "../controller/employer/employerJobController.js";
 import { isAuthenticated } from "../middleware/isAuthenticated.js";
 
-// *** Profile info routes start ****
+// ************* Profile info routes start *********
 
 router
   .route("/employer/profile/personalinfo")
@@ -58,5 +59,24 @@ router
   .delete(isAuthenticated, employerProfileController.deleteSocialAccount);
 
 // ! *********** End Additional info routes *********
+
+// ! ************* Start of Jobs routes ****************
+// * post job
+router
+  .route("/employer/jobs/create")
+  .post(isAuthenticated, employerJobController.postJob);
+
+// * [ get || update ] single jobs
+router
+  .route("/employer/jobs/:id")
+  .get(isAuthenticated, employerJobController.getSingleJob)
+  .put(isAuthenticated, employerJobController.updateSingleJob);
+
+// * post a all job
+router
+  .route("/employer/jobs")
+  .get(isAuthenticated, employerJobController.getAllJob);
+
+// ! ************* end of Jobs routes ****************
 
 export default router;
