@@ -161,7 +161,7 @@ const Editjob = () => {
 
     return (
         <Container className="px-0 mb-72">
-            <div className="px-10 mb-10 rounded shadow-md flex items-center bg-[#1e5e6c] sm:gap-[15rem]  xl:gap-[50rem] md:gap-[25rem]">
+            <div className="px-20 mb-10 rounded shadow-md flex justify-between items-center bg-[#1e5e6c] sm:gap-[15rem]  xl:gap-[50rem] md:gap-[25rem]">
                 <button onClick={() => navigate("/employer/jobs")} className=' bg-cstmO px-3  rounded-lg text-black font-bold  '><FaBackward className="text-white text-2xl my-1  " /></button>
                 <h1 className='font-bold tracking-wider text-white font-roboto text-3xl'>Edit Job</h1>
             </div>

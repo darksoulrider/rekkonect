@@ -73,7 +73,7 @@ const Container = styled.div`
     .cstm-profile-layer{
       position: absolute;
       /* margin-right: 15rem; */
-      right:6rem;
+      right:2rem;
     }
   }
   @media (min-width: ${props => props.theme.isMobile}) and (max-width: ${props => props.theme.isTab}) 
@@ -98,7 +98,7 @@ const Container = styled.div`
     .cstm-profile-layer{
       position: absolute;
       /* margin-right: 15rem; */
-      right:6rem;
+      right:2rem;
     }
     
   }

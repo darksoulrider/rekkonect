@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useReactTable, getCoreRowModel, flexRender, getPaginationRowModel } from "@tanstack/react-table"
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-
+import ShowCandidate from './ShowCandidate'
 
 
 
 const JobListTable = ({ data, columns }) => {
     const navigate = useNavigate();
+    const [isShow, SetisShow] = useState(false);
     // cell clicking handling
     const handleClick = (data, cell) => {
         const isTitle = cell.column.columnDef.header === "Title";
@@ -20,10 +21,11 @@ const JobListTable = ({ data, columns }) => {
         }
 
         if (isApplicants) {
-            if (data.applicants === null) {
-                return alert("NULL values");
+            if (data.applicants.length === 0) {
+                alert("No applications")
+            } else {
+                alert(data.applicants[0]);
             }
-            alert(data.applicants);
         }
     }
 
@@ -39,13 +41,13 @@ const JobListTable = ({ data, columns }) => {
     })
 
     return (
-        <Container className="mx-20">
+        <Container className="">
             <table>
                 <thead>
                     {table.getHeaderGroups().map((headele) => {
                         return <tr key={headele.id} >
                             {headele.headers.map(clm => {
-                                return <th className="text-start text-2xl " key={clm.id} colSpan={clm.colSpan}>
+                                return <th className=" " key={clm.id} colSpan={clm.colSpan}>
                                     {flexRender(
                                         clm.column.columnDef.header,
                                         clm.getContext()
@@ -62,7 +64,7 @@ const JobListTable = ({ data, columns }) => {
                                 const data = ele.original;
                                 const isTitleCell = cell.column.columnDef.header === "Title";
                                 return (
-                                    <td className="cursor-pointer text-2xl"
+                                    <td className="cursor-pointer"
                                         onClick={() => handleClick(data, cell)} key={cell.id}>
                                         {
                                             flexRender(
@@ -77,12 +79,22 @@ const JobListTable = ({ data, columns }) => {
                     })}
                 </tbody>
             </table>
-            <div className='flex justify-center ' >
-                <button className='mr-10 bg-slate-500 p-3 text-white rounded-lg shadow-md hover:bg-slate-800 font-bold text-xl'>first</button>
-                <button className='mr-10 bg-slate-500 p-3 text-white rounded-lg shadow-md hover:bg-slate-800 font-bold text-xl'>prev</button>
-                <button className='mr-10 bg-slate-500 p-3 text-white rounded-lg shadow-md hover:bg-slate-800 font-bold text-xl'>next</button>
-                <button className='mr-10 bg-slate-500 p-3 text-white rounded-lg shadow-md hover:bg-slate-800 font-bold text-xl'>last</button>
+            <div className='cstm-btn' >
+                <button className=''>first</button>
+                <button className=''>prev</button>
+                <button className=''>next</button>
+                <button className=''>last</button>
             </div>
+            <div>
+                {
+                    isShow ?
+                        <ShowCandidate /> : ""
+                }
+                {/* Show pop up of the applicants */}
+            </div>
+
+
+
         </Container >
 
     )
@@ -93,37 +105,234 @@ export default JobListTable
 
 const Container = styled.div`
 
-    table {
-        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
+    @media (max-width: ${props => props.theme.isMobile}){
+        width:100%;
+        overflow-x: auto;
+        margin-right:1rem;
+        table{
+            font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            th{
+                background-color: #063945;
+                color: white;
+                font-size:1.3rem;
+                text-align: start;
+                border: 1px solid #ddd;
+                padding: 1rem;
+            }
+            td{
+                border: 1px solid #ddd;
+                padding: 1rem;
+                font-size: 1.2rem;
+                font-weight:bold;
+            }
+            tr{
+                &:nth-child(even){
+                    background-color: #f2f2f2;
+                }
+                &:hover{
+                    background-color: #f6ecec;
+                    
+                }
+                
+            }
+
+        }
+        .cstm-btn{
+            display:flex;
+            justify-content: center;
+            gap:1rem;
+            /* text-white rounded-lg shadow-md hover:bg-slate-800 font-bold text-xl */
+            >button{
+                padding: 0.7rem 1.3rem;
+                color:white;
+                font-weight:bold;
+                font-size:1.2rem;
+                background-color: #656565;
+                border-radius: 0.5rem;
+                
+                &:hover{
+                    color:white;
+                    background-color: #157499;
+                }
+            }
+        }
+    }
+
+
+    @media (min-width: ${props => props.theme.isMobile} ) and (max-width: ${props => props.theme.isTab}){
+        width:100%;
+        overflow-x: auto;
+        margin-right:1rem;
+        table{
+            font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            th{
+                background-color: #063945;
+                color: white;
+                font-size:1.3rem;
+                text-align: start;
+                border: 1px solid #ddd;
+                padding: 1rem;
+            }
+            td{
+                border: 1px solid #ddd;
+                padding: 1rem;
+                font-size: 1.2rem;
+                font-weight:bold;
+            }
+            tr{
+                &:nth-child(even){
+                    background-color: #f2f2f2;
+                }
+                &:hover{
+                    background-color: #f6ecec;
+                    
+                }
+                
+            }
+
+        }
+        .cstm-btn{
+            display:flex;
+            justify-content: center;
+            gap:1rem;
+            /* text-white rounded-lg shadow-md hover:bg-slate-800 font-bold text-xl */
+            >button{
+                padding: 0.7rem 1.3rem;
+                color:white;
+                font-weight:bold;
+                font-size:1.2rem;
+                background-color: #656565;
+                border-radius: 0.5rem;
+                
+                &:hover{
+                    color:white;
+                    background-color: #157499;
+
+                }
+            }
+        }
+    }
+
+    @media (min-width: ${props => props.theme.isTab} ) and (max-width: ${props => props.theme.isLargeTab}){
+        width:100%;
+        overflow-x: auto;
+        margin-right:1rem;
+        table{
+            font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            th{
+                background-color: #063945;
+                color: white;
+                font-size:1.6rem;
+                text-align: start;
+                border: 1px solid #ddd;
+                padding: 1rem;
+            }
+            td{
+                border: 1px solid #ddd;
+                padding: 1rem;
+                font-size: 1.5rem;
+                font-weight:bold;
+            }
+            tr{
+                &:nth-child(even){
+                    background-color: #f2f2f2;
+                }
+                &:hover{
+                    background-color: #f6ecec;
+                    
+                }
+                
+            }
+
+        }
+        .cstm-btn{
+            display:flex;
+            justify-content: center;
+            gap:1rem;
+            /* text-white rounded-lg shadow-md hover:bg-slate-800 font-bold text-xl */
+            >button{
+                padding: 0.7rem 1.3rem;
+                color:white;
+                font-weight:bold;
+                font-size:1.2rem;
+                background-color: #656565;
+                border-radius: 0.5rem;
+                
+                &:hover{
+                    color:white;
+                    background-color: #157499;
+
+                }
+            }
+        }
+
+
         
     }
+    @media (min-width: ${props => props.theme.isLargeTab} ) and (max-width: ${props => props.theme.isDesktop}){
+        width:100%;
+        overflow-x: auto;
+        margin-right:1rem;
+        table{
+            font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            th{
+                background-color: #063945;
+                color: white;
+                font-size:1.6rem;
+                text-align: start;
+                border: 1px solid #ddd;
+                padding: 1rem;
+            }
+            td{
+                border: 1px solid #ddd;
+                padding: 1rem;
+                font-size: 1.5rem;
+                font-weight:bold;
+            }
+            tr{
+                &:nth-child(even){
+                    background-color: #f2f2f2;
+                }
+                &:hover{
+                    background-color: #f6ecec;
+                    
+                }
+                
+            }
+
+        }
+        .cstm-btn{
+            display:flex;
+            justify-content: center;
+            gap:1rem;
+            /* text-white rounded-lg shadow-md hover:bg-slate-800 font-bold text-xl */
+            >button{
+                padding: 0.7rem 1.3rem;
+                color:white;
+                font-weight:bold;
+                font-size:1.2rem;
+                background-color: #656565;
+                border-radius: 0.5rem;
+                
+                &:hover{
+                    color:white;
+                    background-color: #157499;
+
+                }
+            }
+        }
+    }
     
-    table td,
-    table th {
-    
-
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-table tr:hover {
-  background-color: #ddd;
-}
-
-table th, tfoot td {
-  /* padding-top: 12px; */
-  /* padding-bottom: 12px; */
-  /* background-color: #4caf50; */
-  background-color: #063945;
-  color: white;
-}
-
-
-
 `

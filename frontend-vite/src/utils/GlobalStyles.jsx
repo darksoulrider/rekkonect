@@ -10,7 +10,28 @@ export const screenSize = {
 
 const GlobalStyles = createGlobalStyle`
 
-   
+overflow-y: auto;
+  scrollbar-width: thin; 
+  scrollbar-color: #888 transparent;
+
+
+  ::-webkit-scrollbar {
+    width: 6px; 
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent; 
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 3px; 
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #555; 
+  }
+
 
     *{
         margin:0px;
@@ -26,7 +47,6 @@ const GlobalStyles = createGlobalStyle`
         
         max-width: 100%;
         max-height: 100%;
-        /* overflow-x: hidden; */
         background-color: white;
     }
     input{

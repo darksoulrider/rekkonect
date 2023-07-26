@@ -51,6 +51,7 @@ const AdditionalInfoSchema = new mongoose.Schema(
       },
     ],
   },
+
   { timestamps: true }
 );
 

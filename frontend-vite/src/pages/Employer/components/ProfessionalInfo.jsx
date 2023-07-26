@@ -335,9 +335,6 @@ const ProfessionalInfo = ({ userdata }) => {
                                 </div> : <div></div>
                         }
                     </div>
-
-
-
                 </div>
             </div >
 

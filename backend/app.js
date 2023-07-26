@@ -21,7 +21,7 @@ app.use(
     origin: [
       "http://127.0.0.1:3000",
       "http://localhost:3000",
-      "https://76b0-45-252-75-248.ngrok-free.app",
+      "http://192.168.0.104:3000",
     ],
     // origin: "http://localhost:3000",
     credentials: true,

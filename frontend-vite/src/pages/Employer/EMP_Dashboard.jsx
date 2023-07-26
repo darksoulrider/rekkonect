@@ -30,8 +30,8 @@ const EMP_Dashboard = () => {
 
   return (
     <Container className="flex ">
-      <div className='sidebar' style={{ maxWidth: "30rem" }}>
-        <Sidebar />
+      <div className='sidebar' style={{ maxWidth: "30rem", }}>
+        <Sidebar style={{ border: "11px  solid blue" }} />
       </div>
       <div style={{ minWidth: "100%" }}>
         <EMP_Navbar userData={data.user} className='navbar' />
@@ -50,10 +50,12 @@ export default EMP_Dashboard
 const Container = styled.div`
 
 /*  fix this according to screen widht */
-
+  overflow-x: hidden;
+  
   @media (max-width: ${props => props.theme.isMobile}){
     .outlet{
       padding-top:8rem;
+      
     }
   }
   @media (min-width: ${props => props.theme.isMobile}) and (max-width: ${props => props.theme.isTab}){
@@ -69,7 +71,7 @@ const Container = styled.div`
       .outlet{
       margin-top:8rem;
       margin-left:9.8rem;
-      height:100vh;
+      /* height:100vh; */
     }
   }
 

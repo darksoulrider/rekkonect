@@ -26,7 +26,7 @@ export const postJob = catchAsyncError(async (req, res, next) => {
 export const getAllJob = catchAsyncError(async (req, res, next) => {
   const { user, id, userType, email } = req;
 
-  const alljob = await Emp_JobModel.find({ user: id });
+  const alljob = await Emp_JobModel.find({ user: id }).populate("applicants");
 
   if (!alljob) {
     return next(new ErrorHandler("No job found", 404));
