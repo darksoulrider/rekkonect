@@ -70,17 +70,46 @@ export const LoginController = catchAsyncError(async (req, res, next) => {
   const user = await userModal.findOne({ email: email }).select("+password");
 
   if (!user) {
-    return next(new ErrorHandler("Username or password is incorrect", 404));
+    return next(new ErrorHandler("email or password is incorrect", 404));
   }
 
   const isMatch = await user.comparePassword(password);
   console.log(isMatch);
   if (!isMatch) {
-    return next(new ErrorHandler("Username or password is incorrect", 404));
+    return next(new ErrorHandler("email or password is incorrect", 404));
   }
 
   sendToken(res, user, "Successfully loged in..", 200);
 });
+
+export const LogoutController = catchAsyncError(async (req, res, next) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "successfully logged out.",
+  });
+});
+
+// export const Logout = catchAsyncError(async (req, res, next) => {
+// if needed this way.
+//   res
+//     .status(200)
+//     .cookie("token", null, {
+//       expires: new Date(Date.now()),
+//       httpOnly: true,
+//       secure: true,
+//       sameSite: "none",
+//     })
+//     .json({
+//       success: true,
+//       message: "Logged Out Successfully",
+//     });
+// });
 
 export const GoogleLogin = catchAsyncError(async (req, res, next) => {});
 export const FacebookLogin = catchAsyncError(async (req, res, next) => {});

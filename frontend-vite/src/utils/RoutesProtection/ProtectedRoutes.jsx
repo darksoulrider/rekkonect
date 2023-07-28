@@ -18,6 +18,7 @@ const ProtectedRoutes = ({
 }) => {
 
     // get token from the broswer and then send check availability
+
     if (!token || userType != cstmUserType) {
         return <Navigate to={ridirect} />;
     }

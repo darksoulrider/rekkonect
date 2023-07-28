@@ -3,8 +3,10 @@ import jwt from "jsonwebtoken";
 import ErrorHandler from "../utils/errorHandler.js";
 import { userModal } from "../modal/userModal.js";
 export const isAuthenticated = catchAsyncError(async (req, res, next) => {
+  console.log(req.cookies);
+
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGJkNGRkMDg2N2JhZWE4NzBlZDE3NzkiLCJ1c2VyVHlwZSI6ImVtcGxveWVyIiwiZW1haWwiOiJ0ZXN0aW5nMkBtYWNrLmNvbSIsImlhdCI6MTY5MDEyNzgyNSwiZXhwIjoxNjkwNTU5ODI1fQ.3d1F56uH7jfYaI69J_WgiRC8pah9RrZCcC5tGCfzQEY";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZTMzZTNiNzU3NDZmNzQ5Mjc4NWYiLCJ1c2VyVHlwZSI6ImVtcGxveWVyIiwiZW1haWwiOiJtYWNrQG1hY2suY29tIiwiaWF0IjoxNjkwNTYyNjMzLCJleHAiOjE2OTA5OTQ2MzN9.krRuaWCBWG11wzRqTbT1flp3FabLrDr8cfP1wqY0gos";
 
   console.log("hit this isAuthentticated");
   if (!token) {
@@ -17,9 +19,11 @@ export const isAuthenticated = catchAsyncError(async (req, res, next) => {
     email: decoded.email,
     userType: decoded.userType,
   });
+
   if (!user) {
     return next(new ErrorHandler("Un authorised access", 400));
   }
+
   req.user = user;
   req.userType = decoded.userType;
   req.email = decoded.email;
