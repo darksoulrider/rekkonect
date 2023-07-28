@@ -1,9 +1,9 @@
 import { createGlobalStyle, css } from "styled-components"
 
 export const screenSize = {
-    isMobile: "640px",
-    isTab: "880px",
-    isDesktop: "2000px",
+  isMobile: "640px",
+  isTab: "880px",
+  isDesktop: "2000px",
 }
 
 
@@ -73,6 +73,7 @@ overflow-y: auto;
         transition : 200ms;
         outline: none;
         border-style: none;
+        -webkit-tap-highlight-color: transparent;
     }
     html{
         font-size: 65.5%;

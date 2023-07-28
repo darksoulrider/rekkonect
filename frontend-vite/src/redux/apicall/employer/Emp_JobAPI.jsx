@@ -4,8 +4,12 @@ import { MainUrl } from '../GlobalRoutes';
 
 export const Emp_JobAPI = createApi({
     reducerPath: 'jobs',
-    baseQuery: fetchBaseQuery({ baseUrl: MainUrl }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: "http://localhost:5000/api",
+        credentials: "include",
+    }),
     tagTypes: ['JOBS'],
+
     endpoints: (builder) => ({
         getAllJobs: builder.query({
             query: () => `/employer/jobs`,

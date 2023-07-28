@@ -17,7 +17,7 @@ const ProtectedRoutes = ({
     // ridirect = "/login" for time bing no login routes
 }) => {
 
-    // get token from the broswer and then send check availabilityy
+    // get token from the broswer and then send check availability
     if (!token || userType != cstmUserType) {
         return <Navigate to={ridirect} />;
     }
