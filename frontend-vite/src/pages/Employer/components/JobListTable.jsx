@@ -4,6 +4,8 @@ import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import ShowCandidate from './ShowCandidate'
 
+// ! dummy array below
+import { candidate } from '../../../utils/showCandidate'
 
 
 const JobListTable = ({ data, columns }) => {
@@ -80,15 +82,15 @@ const JobListTable = ({ data, columns }) => {
                 </tbody>
             </table>
             <div className='cstm-btn' >
-                <button className=''>first</button>
-                <button className=''>prev</button>
-                <button className=''>next</button>
-                <button className=''>last</button>
+                <button >first</button>
+                <button >prev</button>
+                <button >next</button>
+                <button >last</button>
             </div>
             <div>
                 {
                     isShow ?
-                        <ShowCandidate /> : ""
+                        <ShowCandidate candidate={candidate} /> : ""
                 }
                 {/* Show pop up of the applicants */}
             </div>

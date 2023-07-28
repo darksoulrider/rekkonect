@@ -15,7 +15,11 @@ const EMP_Navbar = ({ userData }) => {
 
   const [isDropDown, setIsDropDown] = useState(false);
 
-
+  const options = [
+    "Upload Profile",
+    "logout",
+    "checking",
+  ]
   const logout = () => {
     window.alert("logout clicked");
     setIsDropDown(!isDropDown);

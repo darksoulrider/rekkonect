@@ -17,12 +17,12 @@ const Jobs = () => {
 
 
 
-
   const { data, error, isLoading } = useGetAllJobsQuery(
     undefined, {
     refetchOnMountOrArgChange: true,
-  }
-  );
+  });
+
+
   //  instead of this, lets try passing data direct object later on [data.jobs]
   let Rdata = useMemo(() => data?.jobs, [data]);
 
@@ -77,8 +77,6 @@ const Jobs = () => {
       header: 'Date',
       accessorKey: 'createdAt',
       cell: (info) => {
-        // const data = 34;
-        // return `N/A ${data}`
         return DateTime.fromISO(info.getValue()).toLocaleString(DateTime.DATE_MED)
       }
     }
@@ -109,9 +107,6 @@ const Jobs = () => {
 export default Jobs;
 
 const Container = styled.div`
-
-
-
 
   @media (max-width: ${props => props.theme.isMobile}){
     .cstm-head-layer{

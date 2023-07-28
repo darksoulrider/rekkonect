@@ -43,7 +43,7 @@ export const RegisterEmployer = catchAsyncError(async (req, res, next) => {
 
   let user = await userModal.findOne({ email: email });
   if (user) return next(new ErrorHandler("User already Exists..", 401));
-
+  //  we can generate token here and then verify the email with token
   user = await userModal.create({
     firstName: firstName,
     lastName: lastName,

@@ -160,14 +160,21 @@ const Emp_JobsModel = new mongoose.Schema(
       // not sure
     },
     applicants: [
+      //  think when job appliying controller is built
       {
-        type: mongoose.Types.ObjectId,
-        ref: "User",
-        required: [true, "User reference is required"],
-        // validate: {
-        //   validator: (value) => {},
-        //   // check any applicants exist before doing this
-        // },
+        user: {
+          type: mongoose.Types.ObjectId,
+          ref: "User",
+          required: [true, "User reference is required"],
+          // check from controller if presnte then do not add again
+        },
+        applicationDate: {
+          type: Date,
+          default: Date.now,
+        },
+        experience: {
+          type: String,
+        },
       },
     ],
   },
