@@ -4,7 +4,10 @@ import { MainUrl } from '../GlobalRoutes';
 
 export const userEmployerProfile = createApi({
     reducerPath: 'userEmployerProfile',
-    baseQuery: fetchBaseQuery({ baseUrl: MainUrl }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: "http://localhost:5000/api",
+        credentials: "include",
+    }),
     tagTypes: ['info', 'additionalInfo'],
     endpoints: (builder) => ({
         getProfile: builder.query({

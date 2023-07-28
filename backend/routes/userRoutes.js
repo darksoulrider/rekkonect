@@ -9,6 +9,7 @@ import { isAuthenticated } from "../middleware/isAuthenticated.js";
 
 // Authentication  -> controllers
 router.route("/login").post(userController.LoginController);
+router.route("/logout").get(userController.LogoutController);
 // router.route("/signup").post(userController.RegisterController);
 router.route("/employer/signup").post(userController.RegisterEmployer);
 

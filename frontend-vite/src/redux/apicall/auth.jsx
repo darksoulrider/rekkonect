@@ -1,12 +1,12 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { MainUrl } from './GlobalRoutes'
 
 export const Authentication = createApi({
   reducerPath: 'authentication',
   baseQuery: fetchBaseQuery({
-    baseUrl: MainUrl,
 
+    baseUrl: 'http://localhost:5000/api',
+    credentials: "include",
   }),
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -14,12 +14,16 @@ export const Authentication = createApi({
         url: `/login`,
         method: 'POST',
         body: data,
-        credentials: 'include',
+
       })
-    })
+    }),
+    logout: builder.query({
+      query: () => "/logout",
+    }),
+
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation } = Authentication
+export const { useLoginMutation, useLazyLogoutQuery } = Authentication

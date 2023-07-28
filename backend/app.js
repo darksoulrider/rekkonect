@@ -16,15 +16,18 @@ dotenv.config({ path: "./config/.env" });
 
 const app = express();
 
+app.use(cookieParser());
 app.use(
   cors({
-    origin: [
-      "http://127.0.0.1:3000",
-      "http://localhost:3000",
-      "http://192.168.0.104:3000",
-    ],
-    // origin: "http://localhost:3000",
-    credentials: true,
+    // origin: [
+    //   "http://127.0.0.1:3000",
+    //   "http://localhost:3000",
+    //   "http://192.168.0.104:3000",
+    // ],
+
+    // see baseurl is string or not [no variable is allowed]
+    credentials: true, // for credentials true
+    origin: "http://192.168.0.104:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
@@ -35,7 +38,6 @@ app.use(helmet());
 app.use(morgan("dev"));
 
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
-app.use(cookieParser());
 
 // ***** Request routes setup ***********
 import userRotues from "./routes/userRoutes.js";
