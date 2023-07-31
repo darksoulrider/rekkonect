@@ -95,6 +95,36 @@ export const LogoutController = catchAsyncError(async (req, res, next) => {
   });
 });
 
+export const ChangePasswordController = catchAsyncError(async () => {
+  //  think a change password internally as well as without loged in process
+  const { user, id, userType, email } = req;
+  const { oldpassword, newpassword } = req.body;
+
+  if (newpassword.length < 8) {
+    return next(new ErrorHandler("Password must be at least 8 characters"));
+  }
+  const userData = await userModal
+    .findOne({ email: email, _id: id })
+    .select("+password");
+
+  if (!userData) {
+    return next(new ErrorHandler("Something went wrong", 404));
+  }
+
+  const isMatch = await userData.comparePassword(oldpassword);
+  console.log(isMatch);
+  if (!isMatch) {
+    return next(new ErrorHandler("old password is incorrect", 404));
+  }
+  userData.password = newpassword;
+  userData.validate();
+  userData.save();
+  res.status(200).json({
+    success: true,
+    message: "Password successfully updated",
+  });
+});
+
 // export const Logout = catchAsyncError(async (req, res, next) => {
 // if needed this way.
 //   res

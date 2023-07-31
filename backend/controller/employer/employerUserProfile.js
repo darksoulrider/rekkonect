@@ -49,6 +49,12 @@ export const GetPersonalInfo = catchAsyncError(async (req, res, next) => {
   });
 });
 
+export const uploadProfileImageController = catchAsyncError(
+  async (res, req, next) => {
+    
+  }
+);
+
 // ********* Additional INformation Schema ************* [ setting req.id or req.email form isAuth ]
 // we can separate this email into isAuthenticated
 

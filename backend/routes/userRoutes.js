@@ -17,6 +17,10 @@ router.route("/employer/signup").post(userController.RegisterEmployer);
 // router.route("/signupWithFacebook").post(userController.FacebookLogin);
 
 // *** Profile routes ***
+router
+  .route("/employer/changePassword")
+  .post(isAuthenticated, userController.ChangePasswordController);
+
 // ! shifted to separate files
 // router
 //   .route("/employer/profile/personalinfo")

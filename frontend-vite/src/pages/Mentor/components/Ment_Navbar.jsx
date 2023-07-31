@@ -82,6 +82,7 @@ const Container = styled.div`
                 height:6rem;
                 object-fit: contain;
                 -webkit-tap-highlight-color: transparent;   
+                
             }
         }
     }

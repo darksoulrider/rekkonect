@@ -19,15 +19,16 @@ const app = express();
 app.use(cookieParser());
 app.use(
   cors({
-    // origin: [
-    //   "http://127.0.0.1:3000",
-    //   "http://localhost:3000",
-    //   "http://192.168.0.104:3000",
-    // ],
+    origin: [
+      "http://127.0.0.1:3000",
+      "http://localhost:3000",
+      "http://192.168.0.104:3000",
+      "https://391f-45-252-75-248.ngrok-free.ap",
+    ],
 
     // see baseurl is string or not [no variable is allowed]
     credentials: true, // for credentials true
-    origin: "http://192.168.0.104:3000",
+    // origin: "http://192.168.0.104:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );

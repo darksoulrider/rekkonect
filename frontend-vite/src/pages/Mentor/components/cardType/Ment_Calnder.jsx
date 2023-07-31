@@ -32,6 +32,7 @@ const Wrapper = styled.div`
                 /* style={{ borderTop: '1px solid black', margin: '10px 0' }} */
                 border-top: 1px solid black;
                 margin-top: 1rem;
+                
             }
             .cstm-top{
                 display: flex;

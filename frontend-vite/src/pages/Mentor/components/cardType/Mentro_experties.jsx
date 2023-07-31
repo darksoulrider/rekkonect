@@ -62,7 +62,7 @@ const Container = styled.div`
             filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.1));
             min-height: 15rem;
             padding:2.4rem;
-   
+                                    
             >.cstm-top{
                 padding-bottom:2rem;
                 display:flex;
