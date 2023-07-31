@@ -28,6 +28,17 @@ import Profile from './pages/Employer/Profile'
 import Candidate from './pages/Employer/Candidate'
 import CreateJob from './pages/Employer/components/CreateJob'
 import Editjob from './pages/Employer/components/Editjob'
+
+
+// ************** Mentor imports ************************
+import Mentordashboard from './pages/Mentor/Ment_dashboard'
+
+// ************** End Mentor imports ************************
+
+
+
+
+
 // ****** Protected routes ************
 import ProtectedRoutes from './utils/RoutesProtection/ProtectedRoutes'
 import UnAuthProtectedRoutes from './utils/RoutesProtection/UnAuthProtectedRoutes'
@@ -42,7 +53,7 @@ const App = () => {
     tertiary: "#157499"
   }
   let isAuth = true;
-  let usertype = "employer";
+  let usertype = "mentor";
   /*
   -> 
   get token and userType from cookies, which we are sending from backend
@@ -75,7 +86,12 @@ const App = () => {
 
 
           {/* Similar way protect mentor and Employer by passing cstmuser and userType */}
-
+          {/* take redirect as props as well */}
+          <Route element={<ProtectedRoutes userType={usertype} cstmUserType={'mentor'} token={isAuth} />}>
+            <Route>
+              <Route path="/mentor/dashboard" element={<Mentordashboard />} />
+            </Route>
+          </Route>
 
         </Routes>
       </Router>

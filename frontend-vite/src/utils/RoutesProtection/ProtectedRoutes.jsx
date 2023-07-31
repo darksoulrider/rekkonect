@@ -23,6 +23,12 @@ const ProtectedRoutes = ({
         return <Navigate to={ridirect} />;
     }
 
+    if (userType != cstmUserType) {
+        return <Navigate to={ridirect} />;
+        //  also redirect to something went wrong page
+    }
+
+
     return children ? children : <Outlet />;
 
 }

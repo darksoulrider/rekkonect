@@ -5,7 +5,8 @@ export const Authentication = createApi({
   reducerPath: 'authentication',
   baseQuery: fetchBaseQuery({
 
-    baseUrl: 'http://localhost:5000/api',
+    // baseUrl: 'http://localhost:5000/api',
+    baseUrl: 'http://192.168.0.104:5000/api',
     credentials: "include",
   }),
   endpoints: (builder) => ({

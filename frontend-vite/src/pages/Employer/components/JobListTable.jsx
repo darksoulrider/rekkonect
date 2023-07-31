@@ -12,10 +12,10 @@ const JobListTable = ({ data, columns }) => {
     const navigate = useNavigate();
     const [isShow, SetisShow] = useState(false);
     // cell clicking handling
+
     const handleClick = (data, cell) => {
         const isTitle = cell.column.columnDef.header === "Title";
         const isApplicants = cell.column.columnDef.header === "Applicants";
-
 
         if (isTitle) {
             navigate(`/employer/jobs/edit/${data._id}`, { state: { _id: data._id } })

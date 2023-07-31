@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MdNotifications } from "react-icons/md";
 import Logo from "/assets/images/profile.png";
-import { useState } from "react";
 import { Menu } from "@headlessui/react";
 import { IoMdArrowDropdown } from "react-icons/io"
 import { useLazyLogoutQuery } from "../../../redux/apicall/auth";
@@ -12,7 +11,9 @@ import axios from "axios";
 
 
 const EMP_Navbar = ({ userData }) => {
-  const [isDropDown, setIsDropDown] = useState(false);
+  // const [isDropDown, setIsDropDown] = useState(false);
+  const [isPic, SetisPic] = useState(false);
+  const [isPasswordChange, SetisPasswordChange] = useState(false);
   const navopt = [
     "upload profile",
     "change Password",
@@ -68,7 +69,21 @@ const EMP_Navbar = ({ userData }) => {
           </div>
         </Menu>
       </div>
-
+      <div>
+        <div>
+          <h1>Change Password</h1>
+          <div>
+            <div>
+              <p>old password</p>
+              <input type="password" />
+            </div>
+            <div>
+              <p>New password</p>
+              <input type="password" />
+            </div>
+          </div>
+        </div>
+      </div>
     </Container>
   );
 };

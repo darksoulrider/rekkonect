@@ -10,6 +10,8 @@ export const screenSize = {
 
 const GlobalStyles = createGlobalStyle`
 
+
+
 overflow-y: auto;
   scrollbar-width: thin; 
   scrollbar-color: #888 transparent;
@@ -42,9 +44,7 @@ overflow-y: auto;
     body{
         /* font-family: 'Roboto', sans-serif; */
         overflow-x: hidden;
-        font-family: 'Poppins', sans-serif;
-        /* font-family:  'sans-serif'; */
-        
+        font-family: 'Poppins', sans-serif;        
         max-width: 100%;
         max-height: 100%;
         background-color: white;
