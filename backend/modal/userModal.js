@@ -60,6 +60,13 @@ const userSchema = new mongoose.Schema(
       unique: [true, "phone number must be unique"],
       minLength: [10, "phone length should be 10 characters"],
       maxLength: [10, "phone length should be 10 characters"],
+      validate: {
+        validator: (value) => {
+          if (!validator.isNumeric(value)) {
+            throw new Error("Phone number must be numeric value");
+          }
+        },
+      },
     },
     bio: {
       type: String,
@@ -82,11 +89,13 @@ const userSchema = new mongoose.Schema(
       landMark: {
         type: String,
         required: [true, "Landmark value is required"],
+        //  can return true for perticular type of candidate.
       },
       pinCode: {
         type: String,
         required: [true, "pincode value is required"],
         minLength: [6, "Pincode characters must be 6"],
+        maxLength: [6, "Pincode characters must be 6"],
         validate: {
           validator: (value) => {
             if (!validator.isNumeric(value)) {

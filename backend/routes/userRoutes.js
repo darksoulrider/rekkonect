@@ -7,11 +7,14 @@ import * as userController from "../controller/userController.js";
 import * as employerProfileController from "../controller/employer/employerUserProfile.js";
 import { isAuthenticated } from "../middleware/isAuthenticated.js";
 
-// Authentication  -> controllers
+// ********  Authentication  -> controllers *************
 router.route("/login").post(userController.LoginController);
 router.route("/logout").get(userController.LogoutController);
-// router.route("/signup").post(userController.RegisterController);
+// ********* Employer auth *************
 router.route("/employer/signup").post(userController.RegisterEmployer);
+
+// ********* Mentor auth *************
+router.route("/mentor/signup").post(userController.RegisterMentor);
 
 // router.route("/signupWithGoogle").post(userController.GoogleLogin);
 // router.route("/signupWithFacebook").post(userController.FacebookLogin);

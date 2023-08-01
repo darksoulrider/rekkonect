@@ -43,8 +43,11 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 // ***** Request routes setup ***********
 import userRotues from "./routes/userRoutes.js";
 import employeRoutes from "./routes/employerRoutes.js";
+import mentorRoues from "./routes/mentorRoutes.js";
+
 app.use("/api", userRotues);
-app.use("/api", employeRoutes);
+app.use("/api", employeRoutes); // can add api/employer
+app.use("/api", mentorRoues); // can add api/mentor
 
 // ******** Only for test purpose *************
 const data = [

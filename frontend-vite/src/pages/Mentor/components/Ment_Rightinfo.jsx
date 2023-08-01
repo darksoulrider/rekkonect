@@ -6,8 +6,21 @@ import { FaRegHandshake } from "react-icons/fa"
 import { RiFileSearchLine } from "react-icons/ri"
 import { BiSolidEdit } from "react-icons/bi"
 import Ment_Calender from "./cardType/Ment_Calnder"
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+
+
+
 const Ment_Rightinfo = () => {
 
+
+    // let dataG = [];
+    // let num;
+    // for (num = 30, num >= 0; num--) {
+    //     dataG.push({
+    //         date: 
+    //     })
+    // }
     const progressProfile = 90;
     return (
         <Container className="cstm-layer">
@@ -46,6 +59,26 @@ const Ment_Rightinfo = () => {
             <div>
                 <Ment_Calender />
             </div>
+            <div className='cstm-graph'>
+                <div>
+                    <h1>Total Bookings: {`40`}</h1>
+                </div>
+                <div>
+                    {/* <ResponsiveContainer width="100%" height={300}>
+                        <AreaChart
+                            data={data}
+                            margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8" />
+
+                        </AreaChart>
+                    </ResponsiveContainer> */}
+                </div>
+            </div>
 
         </Container>
     )
@@ -56,6 +89,17 @@ export default Ment_Rightinfo
 
 const Container = styled.div`
         @media (min-width: ${props => props.theme.isLargeTab} ) and (max-width: ${props => props.theme.isDesktop}){
+            .cstm-graph{
+                
+                margin-right:6rem;
+                margin-bottom: 2rem;
+                background-color:white;
+                border-radius: 1.5rem;
+                width:45rem;
+                filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
+                min-height: 15rem;
+                padding:2.4rem;
+            }
             .cstm-progress{
                 display: flex;
                 flex-direction: column;

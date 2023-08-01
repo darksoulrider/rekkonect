@@ -5,6 +5,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import sendToken from "../utils/sendtoken.js";
 import { userModal } from "../modal/userModal.js";
 import isGmail from "../utils/isGmail.js";
+import crypto from "crypto";
 
 // ! handle login for email case sensitiveness
 export const RegisterEmployer = catchAsyncError(async (req, res, next) => {
@@ -56,6 +57,62 @@ export const RegisterEmployer = catchAsyncError(async (req, res, next) => {
     userType: userType,
   });
   console.log(`comming from Emplyer regiseter -> ${user}`);
+  sendToken(res, user, "User Successfully registered..", 200);
+});
+
+// *************** Register Mentor ***************
+
+export const RegisterMentor = catchAsyncError(async (req, res, next) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    companyName,
+    address,
+    phoneNumber,
+    DOB,
+    userType,
+  } = req.body;
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !password ||
+    !companyName ||
+    !address ||
+    !phoneNumber ||
+    !DOB ||
+    !userType
+  ) {
+    return next(new ErrorHandler("Please Enter all the field..", 400));
+  }
+
+  if (userType !== "mentor")
+    return next(new ErrorHandler("User must be mentor", 400));
+
+  let user = await userModal.findOne({ email: email });
+  console.log(user);
+  if (user) return next(new ErrorHandler("User already Exists..", 401));
+  //  we can generate token here and then verify the email with token
+  const generateToken = () => {
+    return crypto.randomBytes(12).toString("hex");
+  };
+  const token = generateToken();
+  // send varify email with token
+  user = await userModal.create({
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    password: password,
+    companyName: companyName,
+    address: address,
+    phoneNumber: phoneNumber,
+    birthdate: DOB,
+    userType: userType,
+    verifyToken: token,
+  });
+  console.log(`comming from Mentor regiseter -> ${user}`);
   sendToken(res, user, "User Successfully registered..", 200);
 });
 
