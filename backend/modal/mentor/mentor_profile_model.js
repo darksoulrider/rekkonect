@@ -21,37 +21,43 @@ const MentorProfile = new mongoose.Schema(
       required: [true, "User reference is required"],
       unique: true,
     },
-    availableslots: {
-      singleslot: {
+
+    singleslot: [
+      {
         mdate: {
           type: Date,
-          required: [this?.availableslots?.singleslot, "date is required"],
-          //   validate date
-        },
-        mtime: {
-          type: String,
-          required: [this?.availableslots?.singleslot, "time is required"],
-          //   put validation on time
-        },
-      },
-      recuringSlot: {
-        mdays: [
-          {
-            type: String,
-            required: [this?.availableslots?.recuringSlot, "day is required"],
-            enum: {
-              values: days,
-              message: "not matched weekdays",
+          required: [true, "date is required"],
+          validate: {
+            validator: (value) => {
+              const d = new Date();
+              if (value < d) {
+                throw new Error("Date should not represent past");
+              }
             },
           },
-        ],
+        },
         mtime: {
           type: String,
-          required: [this?.availableslots?.recuringSlot, "time is required"],
-          //   put validation on time
+          required: [true, "time is required"],
         },
       },
-    },
+    ],
+    recuringSlot: [
+      {
+        mdays: {
+          type: [String],
+          required: [true, "day is required"],
+          enum: {
+            values: days,
+            message: "not matched weekdays",
+          },
+        },
+        mtime: {
+          type: String,
+          required: [true, "time is required"],
+        },
+      },
+    ],
     education: [
       {
         college: {
@@ -100,8 +106,8 @@ const MentorProfile = new mongoose.Schema(
           minLength: [10, "minimum 10 characters required"],
         },
         status: {
-          type: Boolean,
-          default: false,
+          type: String,
+          default: "N/A",
         },
       },
     ],
@@ -138,7 +144,7 @@ const MentorProfile = new mongoose.Schema(
             validator: () => {},
           },
         },
-        phone: {
+        contact: {
           type: String,
           required: [true, "phone number  is required"],
           minLength: [10, "minimum 10 integers required"],
@@ -159,9 +165,22 @@ const MentorProfile = new mongoose.Schema(
       },
     ],
     sessioncharge: {
-      type: Number,
-      min: [0, "minimum 0 fees required"],
-      max: [1300, "maximum 1300 fees required"],
+      type: String,
+      // min: [0, "minimum 0 fees required"],
+      // max: [1300, "maximum 1300 fees required"],
+      validate: {
+        validator: (value) => {
+          if (!validator.isNumeric(value)) {
+            throw new Error("session charge must be a number");
+          }
+          const num = parseFloat(value);
+          if (num < 0 || num > 1300) {
+            throw new Error(
+              "session charge must be between 0 to 1300 a number"
+            );
+          }
+        },
+      },
     },
   },
   { validateBeforeSave: true, timestamps: true }
