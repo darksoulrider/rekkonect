@@ -20,6 +20,9 @@ export const isValidTime = (time) => {
 };
 
 export const isValidDate = (date) => {
+  if (!date) {
+    return false;
+  }
   const formats = ["yyyy-MM-dd", "dd/MM/yyyy", "yyyy/MM/dd", "dd-MM-yyyy"];
 
   let validDate = false;

@@ -166,8 +166,6 @@ const MentorProfile = new mongoose.Schema(
     ],
     sessioncharge: {
       type: String,
-      // min: [0, "minimum 0 fees required"],
-      // max: [1300, "maximum 1300 fees required"],
       validate: {
         validator: (value) => {
           if (!validator.isNumeric(value)) {

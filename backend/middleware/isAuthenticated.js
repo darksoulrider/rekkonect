@@ -4,8 +4,13 @@ import ErrorHandler from "../utils/errorHandler.js";
 import { userModal } from "../modal/userModal.js";
 export const isAuthenticated = catchAsyncError(async (req, res, next) => {
   // token is for mentor session
+  // for mentor mentor@mack.com
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM4YjI3YTJmOWM3ZjdjZWQxZmU2NmMiLCJ1c2VyVHlwZSI6Im1lbnRvciIsImVtYWlsIjoibWVudG9yQG1hY2suY29tIiwiaWF0IjoxNjkwODc0NDkxLCJleHAiOjE2OTEzMDY0OTF9.4EDroTCdrljAIf3Y5JFWOApROrwSWR8SZip71xprr1A";
+
+  // for meenakshin inventiway
+  // const token =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhOGQ1NDk0YWMwNDU4ZjYwZWU3Y2YiLCJ1c2VyVHlwZSI6Im1lbnRvciIsImVtYWlsIjoibWVuYWtzaGlAaW52ZW50aXdheS5jb20iLCJpYXQiOjE2OTEyMTg0MjgsImV4cCI6MTY5MTY1MDQyOH0.rqE-ei-Ziv9Bt5r4RIQucDnPGRDo26TElN9FM3LAHnU";
 
   console.log("hit this isAuthentticated");
   if (!token) {

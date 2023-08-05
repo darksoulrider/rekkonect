@@ -79,7 +79,16 @@ overflow-y: auto;
         font-size: 65.5%;
     }
     
-`
+    @media (max-width: 1480px ){
+      html{
+        font-size: 50%;
+      }
+    }
 
+`
+// isMobile: "640px",
+// isTab: "880px",
+// isLargeTab: "1280px",
+// isDesktop: "4000px",
 
 export default GlobalStyles;

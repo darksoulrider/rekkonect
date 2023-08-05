@@ -6,21 +6,25 @@ import { FaRegHandshake } from "react-icons/fa"
 import { RiFileSearchLine } from "react-icons/ri"
 import { BiSolidEdit } from "react-icons/bi"
 import Ment_Calender from "./cardType/Ment_Calnder"
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { GraphDate } from '../../../utils/helper/helper';
 
+import {
+    ResponsiveContainer,
+    AreaChart,
+    XAxis,
+    YAxis,
+    Area,
+    Tooltip,
+    CartesianGrid
 
-
+}
+    from "recharts"
 
 const Ment_Rightinfo = () => {
 
+    const mydata = GraphDate();
 
-    // let dataG = [];
-    // let num;
-    // for (num = 30, num >= 0; num--) {
-    //     dataG.push({
-    //         date: 
-    //     })
-    // }
+
     const progressProfile = 90;
     return (
         <Container className="cstm-layer">
@@ -64,23 +68,21 @@ const Ment_Rightinfo = () => {
                     <h1>Total Bookings: {`40`}</h1>
                 </div>
                 <div>
-                    {/* <ResponsiveContainer width="100%" height={300}>
-                        <AreaChart
-                            data={data}
-                            margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
-                        >
+                    <ResponsiveContainer width="100%" height={300}>
+                        <AreaChart data={mydata}>
+
+                            <Area dataKey="value" />
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
+                            <XAxis dataKey="date" />
+                            <YAxis dataKey={'booking'} />
                             <Tooltip />
-                            <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8" />
 
                         </AreaChart>
-                    </ResponsiveContainer> */}
+                    </ResponsiveContainer>
                 </div>
             </div>
 
-        </Container>
+        </Container >
     )
 }
 
