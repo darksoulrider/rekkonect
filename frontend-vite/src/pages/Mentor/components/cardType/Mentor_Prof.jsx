@@ -78,7 +78,8 @@ const Mentor_Prof = () => {
                     <BiSolidEdit className='cstm-edit' onClick={() => SetisOpen(true)} />
                 </div>
                 <div className='cstm-bio'>
-                    <p className=''>Cuber Security | c++ | python | Working in jungle</p>
+                    <p className=' font-sans  pb-10'>Cuber Security | c++ | python | Working in jungle</p>
+
                 </div>
                 <div className='cstm-details flex-wrap'>
                     <div>
@@ -250,66 +251,12 @@ export default Mentor_Prof;
 
 
 const Container = styled.div`
-    .cstm-layer{
-        
-        background-color:white;
-        border-radius: 1.5rem;
-        margin:2rem 4rem;
-        filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
-        min-height: 15rem;
-        padding:2.4rem;
-        >.cstm-top{
-                padding-bottom:2rem;
-                display:flex;
-                justify-content: space-between;
-                align-items:center;
-        
-                >p{
-                    font-size:2rem;
-                    font-weight: bold;
-                }
-             
-                >.cstm-edit{
-                    font-size:2.4rem;
-                    color: gray;
-                    cursor:pointer;
-                    &:hover{
-                        color: #ff6400;
-                    }
-                }
-            }
-        .cstm-bio{
-            >p{
-                font-family: sans-serif;
-                padding-bottom:1.4rem;
-                font-weight: bold;
-                font-size:1.4rem;
-                color: #292929;
-                
-            }
-        }
 
-        >.cstm-details{
-            display:flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            
-            >div{
-                flex-basis: 40%;
-                margin-bottom:1rem;
-                >p{
-                    font-size:1.4rem;
-                    color: #ff6400;
-                    font-weight: bold;
-                    margin-bottom:0.4rem;
-                }
-                >span{
-                    font-size:1.6rem;
-                }
-            }
-        }
-    }
-    .cstm-popup{
+  
+
+    @media (max-width: ${props => props.theme.isMobile}){
+
+        .cstm-popup{
             position: fixed;
             top: 0;
             left: 0;
@@ -324,6 +271,7 @@ const Container = styled.div`
             >.cstm-popup-edit{
                 background-color: #fff;
                 padding: 1rem 3rem;
+                width:38rem;
                 z-index: 2000;
                 border-radius:1rem;
                 >div>.cstm-close{
@@ -335,6 +283,353 @@ const Container = styled.div`
                         color: #2a1203;
                     }
                 }
+
+                .cstm-form-content{
+                    input{
+                        height:3.9rem;
+                        width:16rem;
+                    }
+                    span{
+                        color:red;
+                        font-size:1.1rem;
+                        font-family: 'roboto';
+                        
+                    }
+                   
+                }
+                textarea{
+                    width:16rem;
+                    resize:none;
+
+                }
+                >div>span{
+                    color:red;
+                    font-size:1.1rem;
+                    font-family: 'roboto';
+                }
+            }
+        }
+
+        .cstm-layer{
+            
+            background-color:white;
+            border-radius: 1.5rem;
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
+            padding:2.4rem;
+            
+            >.cstm-top{
+                padding-bottom:1rem;
+                display:flex;
+                justify-content: space-between;
+                align-items:center;
+                /* flex justify-between text-2xl font-bold */
+                >p{
+                    font-size:2rem;
+                    font-weight: bold;
+                }
+             
+                >.cstm-edit{
+                    font-size:2.4rem;
+                    color:gray;
+                    cursor:pointer;
+                    &:hover{
+                        color: #ff6400;
+                    }
+                }
+            }
+
+            >.cstm-bio{
+                >p{
+                    font-size:1.2rem;
+                    font-weight: bold;
+                    color: gray;
+                }
+            }
+            >.cstm-details {
+                display:flex;
+                justify-content: space-between;
+                
+                >div{
+                    flex-basis: 40%;
+                    margin-bottom:1rem;
+                }
+                >div>p{
+                    font-size:1.4rem;
+                    color: #ff6400;
+                    font-weight: bold;
+                    margin-bottom:0.4rem;
+                }
+                >div>span{
+                    font-size:1.3rem;
+                    font-weight:bold;
+                    color: gray;
+                }
+            }
+        }
+    }
+
+
+
+    @media (min-width: ${props => props.theme.isMobile} ) and (max-width: ${props => props.theme.isTab}){
+        .cstm-popup{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index:10;
+            backdrop-filter: blur(2px); 
+            >.cstm-popup-edit{
+                background-color: #fff;
+                padding: 1rem 3rem;
+                width:38rem;
+                z-index: 2000;
+                border-radius:1rem;
+                >div>.cstm-close{
+                    color:red;
+                    font-size:3.3rem;
+                    cursor: pointer;
+                    margin:1rem 0rem;
+                    &:hover{
+                        color: #2a1203;
+                    }
+                }
+
+                .cstm-form-content{
+                    input{
+                        height:3.9rem;
+                        width:16rem;
+                    }
+                    span{
+                        color:red;
+                        font-size:1.1rem;
+                        font-family: 'roboto';
+                        
+                    }
+                   
+                }
+                textarea{
+                    width:16rem;
+                    resize:none;
+
+                }
+                >div>span{
+                    color:red;
+                    font-size:1.1rem;
+                    font-family: 'roboto';
+                }
+            }
+        }
+
+        .cstm-layer{
+            
+            background-color:white;
+            border-radius: 1.5rem;
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
+            padding:2.4rem;
+            
+            >.cstm-top{
+                padding-bottom:1rem;
+                display:flex;
+                justify-content: space-between;
+                align-items:center;
+                >p{
+                    font-size:2rem;
+                    font-weight: bold;
+                }
+             
+                >.cstm-edit{
+                    font-size:2.4rem;
+                    color:gray;
+                    cursor:pointer;
+                    &:hover{
+                        color: #ff6400;
+                    }
+                }
+            }
+
+            >.cstm-bio{
+                >p{
+                    font-size:1.5rem;
+                    font-weight: bold;
+                    color: gray;
+                    font-family:sans-serif;
+                }
+            }
+            >.cstm-details {
+                display:flex;
+                justify-content: space-between;
+                
+                >div{
+                    flex-basis: 40%;
+                    margin-bottom:1rem;
+                }
+                >div>p{
+                    font-size:1.6rem;
+                    color: #ff6400;
+                    font-weight: bold;
+                    margin-bottom:0.4rem;
+                }
+                >div>span{
+                    font-size:1.6rem;
+                    font-weight:bold;
+                    color: #666363;
+                }
+            }
+        }
+    }
+
+
+    @media (min-width: ${props => props.theme.isTab} ) and (max-width: ${props => props.theme.isLargeTab}){
+
+
+        .cstm-popup{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index:10;
+            backdrop-filter: blur(2px); 
+            >.cstm-popup-edit{
+                background-color: #fff;
+                padding: 1rem 3rem;
+                width:38rem;
+                z-index: 2000;
+                border-radius:1rem;
+                >div>.cstm-close{
+                    color:red;
+                    font-size:3.3rem;
+                    cursor: pointer;
+                    margin:1rem 0rem;
+                    &:hover{
+                        color: #2a1203;
+                    }
+                }
+
+                .cstm-form-content{
+                    input{
+                        height:3.9rem;
+                        width:16rem;
+                    }
+                    span{
+                        color:red;
+                        font-size:1.1rem;
+                        font-family: 'roboto';
+                        
+                    }
+                   
+                }
+                textarea{
+                    width:16rem;
+                    resize:none;
+
+                }
+                >div>span{
+                    color:red;
+                    font-size:1.1rem;
+                    font-family: 'roboto';
+                }
+            }
+        }
+        
+        .cstm-layer{
+            
+            background-color:white;
+            border-radius: 1.5rem;
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
+            padding:2.4rem;
+            min-width:150%;
+            border : 1px solid  blue;
+            >.cstm-top{
+                padding-bottom:1rem;
+                display:flex;
+                justify-content: space-between;
+                align-items:center;
+                >p{
+                    font-size:2rem;
+                    font-weight: bold;
+                }
+             
+                >.cstm-edit{
+                    font-size:2.4rem;
+                    color:gray;
+                    cursor:pointer;
+                    &:hover{
+                        color: #ff6400;
+                    }
+                }
+            }
+
+            >.cstm-bio{
+                >p{
+                    font-size:1.4rem;
+                    font-weight: bold;
+                    color: gray;
+                    font-family:sans-serif;
+                }
+            }
+            >.cstm-details {
+                display:flex;
+                justify-content: space-between;
+                
+                >div{
+                    flex-basis: 40%;
+                    margin-bottom:1rem;
+                }
+                >div>p{
+                    font-size:1.6rem;
+                    color: #ff6400;
+                    font-weight: bold;
+                    margin-bottom:0.4rem;
+                }
+                >div>span{
+                    font-size:1.4rem;
+                    font-weight:bold;
+                    color: #666363;
+                }
+            }
+        }
+    }
+
+    @media (min-width: ${props => props.theme.isLargeTab} ) and (max-width: ${props => props.theme.isDesktop}){
+  
+        .cstm-popup{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index:10;
+            backdrop-filter: blur(2px); 
+            >.cstm-popup-edit{
+                background-color: #fff;
+                padding: 1rem 3rem;
+                
+                z-index: 2000;
+                border-radius:1rem;
+                >div>.cstm-close{
+                    color:red;
+                    font-size:3.3rem;
+                    cursor: pointer;
+                    margin:1rem 0rem;
+                    &:hover{
+                        color: #2a1203;
+                    }
+                }
+
                 .cstm-form-content{
                     input{
                         height:3.9rem;
@@ -351,6 +646,7 @@ const Container = styled.div`
                 textarea{
                     width:45rem;
                     resize:none;
+
                 }
                 >div>span{
                     color:red;
@@ -359,6 +655,58 @@ const Container = styled.div`
                 }
             }
         }
+
+        .cstm-layer{
+            margin-left:6rem;
+            background-color:white;
+            border-radius: 1.5rem;
+            margin-right:3.1rem;
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
+            min-height: 15rem;
+            padding:2.4rem;
+   
+            >.cstm-top{
+                padding-bottom:1rem;
+                display:flex;
+                justify-content: space-between;
+                align-items:center;
+                /* flex justify-between text-2xl font-bold */
+                >p{
+                    font-size:2rem;
+                    font-weight: bold;
+                }
+             
+                >.cstm-edit{
+                    font-size:2.4rem;
+                    color:gray;
+                    cursor:pointer;
+                    &:hover{
+                        color: #ff6400;
+                    }
+                }
+            }
+
+
+            >.cstm-details {
+                display:flex;
+                justify-content: space-between;
+                >div{
+                    flex-basis: 40%;
+                    margin-bottom:1rem;
+                    /* border: 1px solid blue; */
+                }
+                >div>p{
+                    font-size:1.6rem;
+                    color: #ff6400;
+                    font-weight: bold;
+                    margin-bottom:0.4rem;
+                }
+                >div>span{
+                    font-size:1.6rem;
+                }
+            }
+        }
+    }
 
 
 `
