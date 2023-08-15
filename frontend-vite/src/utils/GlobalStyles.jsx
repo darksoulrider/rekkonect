@@ -7,9 +7,10 @@ export const screenSize = {
 }
 
 
-
 const GlobalStyles = createGlobalStyle`
 
+/* this is used for react-select extra inner border for input area [ due to tailwind plugin ] */
+input[type='text']:focus { box-shadow: none; }
 
 
 overflow-y: auto;
@@ -79,11 +80,12 @@ overflow-y: auto;
         font-size: 65.5%;
     }
     
-    @media (max-width: 1480px ){
+    @media (min-width: 1480px ){
       html{
-        font-size: 50%;
+        font-size: 60%;
       }
     }
+
 
 `
 // isMobile: "640px",

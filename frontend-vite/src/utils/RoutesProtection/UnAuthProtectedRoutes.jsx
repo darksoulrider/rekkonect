@@ -19,7 +19,7 @@ const UnAuthProtectedRoutes = ({
         } else if (userType === enums.candidate) {
             return <Navigate to={'/candidate/profile'} />;
         } else if (userType === enums.mentor) {
-            return <Navigate to={'/mentor/profile'} />;
+            return <Navigate to={'/mentor/dashboard'} />;
         }
     }
 

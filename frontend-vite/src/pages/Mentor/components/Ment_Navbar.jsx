@@ -86,12 +86,48 @@ const Container = styled.div`
             }
         }
     }
+    @media (min-width: ${props => props.theme.isMobile}) and (max-width: ${props => props.theme.isTab}) {
+
+        .cstm-nav-layer{
+            display: flex;
+            justify-content: space-between;
+            align-items:center;
+            >div>.cstm-logo{
+                object-fit: contain;
+                -webkit-tap-highlight-color: transparent;   
+                
+            }
+        }
+
+    }
+
+    
+    @media (min-width: ${props => props.theme.isTab}) and (max-width: ${props => props.theme.isLargeTab}) {
+
+        .cstm-nav-layer{
+            display: flex;
+            justify-content: space-between;
+            align-items:center;
+
+            >div>.cstm-logo{
+                object-fit: contain;
+                -webkit-tap-highlight-color: transparent;   
+   
+            }
+        }
+
+    }
+
+
     @media (min-width: ${props => props.theme.isLargeTab}) and (max-width: ${props => props.theme.isDesktop}) {
         .cstm-nav-layer{
             display: flex;
             justify-content: space-between;
             align-items:center;
         }
+
+
+
     }
 
 

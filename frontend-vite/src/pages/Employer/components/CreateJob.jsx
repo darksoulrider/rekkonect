@@ -229,6 +229,7 @@ const CreateJob = () => {
                                     height: '1rem',
                                     alignContent: 'center',
 
+
                                 }),
                                 placeholder: (baseStyles, state) => ({
                                     ...baseStyles,

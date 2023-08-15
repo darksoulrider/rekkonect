@@ -5,8 +5,8 @@ import { BiSolidEdit } from "react-icons/bi"
 const Mentor_Edu = () => {
     return (
         <Container>
-            <div className='cstm-layer  '>
-                <div className='cstm-top mb-10 '>
+            <div className='cstm-layer'>
+                <div className='cstm-top'>
                     <p>My Education</p>
                     <AiOutlinePlusCircle className='cstm-edit ' />
                 </div>

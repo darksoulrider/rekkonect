@@ -54,6 +54,7 @@ const App = () => {
   }
   let isAuth = true;
   let usertype = "mentor";
+  // let usertype = "employer";
   /*
   -> 
   get token and userType from cookies, which we are sending from backend
@@ -104,21 +105,3 @@ const App = () => {
 export default App
 
 // const data = themeValue === "light" ? lightTheme : darkTheme;
-
-{/* Mentor Section */ }
-{/* <Route path='/employer' element={""}>
-          </Route> */}
-{/* Candidate Section */ }
-{/* <Route path='/employer' element={""}>
-          </Route> */}
-{/* Admin Section */ }
-{/* <Route path='/employer' element={""}>
-          </Route> */}
-{/* No path match error */ }
-{/* <Route path='*'>  
-            <Route element={<NotFound/>}/>
-          </Route> */}
-
-{/* <Route path='/profile' element={''}/>
-            <Route path='/jobs' element={''}/>
-            <Route path='/communication' element={''}/> */}
