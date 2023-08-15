@@ -30,48 +30,9 @@ const Ment_Leftinfo = () => {
 export default Ment_Leftinfo
 
 const Container = styled.div`
-
-
-@media (max-width: ${props => props.theme.isMobile}){
-  .cstm-left{
-    display:flex;
-    flex-direction:column;
-    gap:4rem;
-    margin:1.2rem;
-    }
-}
-
-@media (min-width: ${props => props.theme.isMobile} ) and (max-width: ${props => props.theme.isTab}){
     .cstm-left{
+        padding:1rem 3rem;
         display:flex;
         flex-direction:column;
-        gap:4rem;
-        margin:1.2rem;
     }
-}
-
-
-
-@media (min-width: ${props => props.theme.isTab} ) and (max-width: ${props => props.theme.isLargeTab}){
-    .cstm-left{
-        display:flex;
-        flex-direction:column;
-        gap:4rem;
-        margin:0rem 2rem;
-        width: 40rem;
-        
-    }
-}
-@media (min-width: ${props => props.theme.isLargeTab} ) and (max-width: ${props => props.theme.isDesktop}){
-    .cstm-left{
-        width:90rem;
-        border:2px solid red;
-        display:flex;
-        flex-direction:column;
-        gap:2rem;
-    }
-}
-
-
-
 `

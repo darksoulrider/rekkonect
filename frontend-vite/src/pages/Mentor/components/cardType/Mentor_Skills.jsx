@@ -43,15 +43,10 @@ const Mentor_Skills = () => {
 
 export default Mentor_Skills;
 
-// for if needed individula delete optionn
-{/* <div className='cstm-del-info flex text-4xl gap-4'>
-                            <BiSolidEdit className='hover:text-cstmB cursor-pointer' />
-                            <AiFillDelete className='hover:text-red-500 cursor-pointer' />
-                        </div> */}
 const Container = styled.div`
 
-    @media (min-width: ${props => props.theme.isLargeTab} ) and (max-width: ${props => props.theme.isDesktop}){
-        .cstm-layer{
+
+        .cstm-layer{    
             margin-left:6rem;
             background-color:white;
             border-radius: 1.5rem;
@@ -123,5 +118,8 @@ const Container = styled.div`
            
             }
         }
-    }
+
+
+
+
 `

@@ -29,11 +29,12 @@ const Mentordashboard = () => {
           </div>
         </div>
       </div>
-      <div className="cstm-layer-left-right pt-40 bg-[#f7f8fa]">
+
+
+      <div className="cstm-layer-left-right">
         <div className='cstm-leftside'>
           <Ment_Leftinfo />
         </div>
-
         <div className='cstm-rightside'>
           <Ment_Rightinfo />
         </div>
@@ -55,74 +56,18 @@ export default Mentordashboard;
 
 
 const Container = styled.div`
-
-
-
-@media (min-width: ${props => props.theme.isTab} ) and (max-width: ${props => props.theme.isLargeTab}){
   .cstm-layer-left-right{
-  border: 2px solid red;
-  display:grid;
-  grid-template-columns: 70% 30%;
-  .cstm-leftside{
-    border: 1px solid blue;
-  }
-  >.cstm-rightside{
-      border:3px solid green;
-      flex-grow: 1;
-  }
-
-  }
-}
-@media (max-width: ${props => props.theme.isMobile}){
-  .cstm-layer-left-right{
-    display:flex;
-    flex-direction:column;
-    justify-content: center;
-  }
-}
-
-@media (min-width: ${props => props.theme.isMobile} ) and (max-width: ${props => props.theme.isTab}){
-  .cstm-layer-left-right{
-    display:flex;
-    flex-direction:column;
-    justify-content: center;
-  }
-}
- /* @media (min-width: ${props => props.theme.isTab} ) and (max-width: ${props => props.theme.isLargeTab}){
-  .cstm-layer-left-right{
-    display:flex;
-    justify-content: center;
-
-    >.cstm-leftside{
-      flex-basis: 60%;
-
-      border: 1px solid blue;
+    background-color: #f7f8fa;
+    display: grid;
+    grid-template-columns: 65% 35%;
+    border: 3px solid blue;
+    padding-top:8rem;
+    .cstm-leftside{
+      border: 3px solid red;
     }
-    >.cstm-rightside{
-      flex-basis: 40%;
-
-      border: 2px solid green;
-    } 
-
-  }
-}  */
-
-@media (min-width: ${props => props.theme.isLargeTab} ) and (max-width: ${props => props.theme.isDesktop}){
-
-  .cstm-layer-left-right{
-    display:flex;
-    gap:4rem;
-    justify-content: center;
-    border: 3px solid black;
-    >.cstm-rightside{
-      border:3px solid green;
-    }
-    >.cstm-leftside{
-      border:3px solid green;
-      
+    .cstm-rightside{
+      border: 3px solid green;
     }
   }
-
-}
 
 `

@@ -45,6 +45,7 @@ const Ment_Rightinfo = () => {
                     </div>
                 </div>
 
+
                 <div className='cstm-mentors-jobs'>
                     <div className='cstm-mlink'>
                         <div className='cstm-meetlink'>
@@ -66,10 +67,15 @@ const Ment_Rightinfo = () => {
                         />
                     </div>
                 </div>
+                {/* can add edit meet lnk popup here */}
+
+
                 <div>
                     <Ment_Calender />
                 </div>
-                <div className='cstm-graph'>
+
+
+                <div className='cstm-bg-all cstm-graph'>
                     <div className='text-3xl font-bold text-gray-700 pb-5'>
                         <h1 className='font-sans'>Total Bookings: {`40`}</h1>
                     </div>
@@ -96,7 +102,9 @@ const Ment_Rightinfo = () => {
                         </ResponsiveContainer>
                     </div>
                 </div>
-                <div className="cstm-graph">
+
+
+                <div className="cstm-bg-all ">
                     <div className="flex justify-between items-center">
                         <h1 className='text-2xl font-bold' >Availablity</h1>
                         <span className='text-2xl font-bold text-[#056689] cursor-pointer hover:text-slate-600' >Edit</span>
@@ -114,7 +122,7 @@ const Ment_Rightinfo = () => {
                     </div>
                 </div>
 
-                <div className="cstm-graph">
+                <div className="cstm-bg-all ">
                     <div className="flex justify-between items-center">
                         <img src={DotIcon} className='w-12 h-12' />
                         <span className='text-2xl font-bold text-[#056689] cursor-pointer hover:text-slate-600' >Edit</span>
@@ -129,7 +137,8 @@ const Ment_Rightinfo = () => {
 
                     </div>
                 </div>
-                <div className="cstm-graph">
+
+                <div className="cstm-bg-all ">
                     <div className="flex  items-center justify-between">
                         <div className="flex gap-5 items-center">
                             <img src={DotIcon} className='w-12 h-12' />
@@ -155,133 +164,104 @@ export default Ment_Rightinfo
 
 const Container = styled.div`
 
-        @media (min-width: ${props => props.theme.isTab} ) and (max-width: ${props => props.theme.isLargeTab}){
-            .cstm-layer-top{
-                
-                border:2px solid red;
-                margin-right:2rem;
-                min-width:40rem;
-                > .cstm-progress{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content:center;
-                    gap:1rem;
-                    margin-right:6rem;
+    .cstm-layer-top{
+        >.cstm-progress{
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            gap:1rem;
+            background-color:white;
+            border-radius: 1.5rem;
 
-                    margin-bottom: 2rem;
-                    background-color:white;
-                    border-radius: 1.5rem;
-                    width:100%;
-                    filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
-                    min-height: 15rem;
-                    padding:2.4rem;
-                    >div>p{
-                        font-size:1.9rem;
-                    }
-                    /* .cstm-progress-layer{
-                        >div
-                    } */
-                }   
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
+            min-height: 15rem;
+            padding:2.4rem;
+            margin:0rem 2rem;
+            margin-top:3.6rem;
+            margin-bottom:2rem;
+            >div>p{
+                font-size:1.9rem;
+            }
+            >.cstm-progress-layer{
+                max-width:40rem;
             }
         }
 
-
-        @media (min-width: ${props => props.theme.isLargeTab} ) and (max-width: ${props => props.theme.isDesktop}){
-            .cstm-graph{
-                
-                margin-right:6rem;
-                margin-bottom: 2rem;
-                background-color:white;
-                border-radius: 1.5rem;
-                width:45rem;
-                filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
-                min-height: 15rem;
-                padding:2.4rem;
-            }
-            .cstm-progress{
-                display: flex;
-                flex-direction: column;
-                justify-content:center;
-                gap:1rem;
-                margin-right:6rem;
-                margin-bottom: 2rem;
-                background-color:white;
-                border-radius: 1.5rem;
-                width:45rem;
-                filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
-                min-height: 15rem;
-                padding:2.4rem;
-                >div>p{
-                    font-size:1.9rem;
+        .cstm-mentors-jobs{
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            gap:1rem;
+            margin:0rem 2rem;
+            background-color:white;
+            border-radius: 1.5rem;
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
+            min-height: 15rem;
+            padding:2.4rem;
+            margin-bottom:2rem;
+            
+            >.cstm-mlink{
+                margin: 0 3rem;
+                margin-bottom:1.3rem;
+                >.cstm-li{
+                    font-size:1.6rem;
+                    color: #4c4b4b;
                 }
-            }   
-            .cstm-mentors-jobs{
-                display: flex;
-                flex-direction: column;
-                justify-content:center;
-                gap:1rem;
-                width:45rem;
-                background-color:white;
-                border-radius: 1.5rem;
-                filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
-                min-height: 15rem;
-                padding:2.4rem;
-                margin-bottom:2rem;
-                
-                >.cstm-mlink{
-
-                    margin: 0 3rem;
-                    margin-bottom:1.3rem;
-
-                    >.cstm-li{
-                        font-size:1.6rem;
-                        color: #4c4b4b;
-                    }
-
-                    >.cstm-meetlink{
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        width: 100%;
-                        
-                        >p{
-                            font-size:1.6rem;
-                            font-weight:bold;
-                            font-family:roboto;
-                            color: #056689;
-                        }
-                        >.cstm-editlink{
-                            font-size:2.8rem;
-                            color: #a97103;
-                            cursor: pointer;
-                        }
-
-                    }
-                }
-
-
-                >.cstm-meet-mn-jb{
+                >.cstm-meetlink{
                     display: flex;
+                    flex-direction: row;
                     justify-content: space-between;
-                    margin: 0 3rem;
-                    align-items: center;
-                    >.cstm-link{
+                    width: 100%;
+                    
+                    >p{
                         font-size:1.6rem;
-                        font-weight: bold;
-                        font-family: roboto;
-                        letter-spacing:0.5px;
+                        font-weight:bold;
+                        font-family:roboto;
                         color: #056689;
-                        &:hover{
-                            color: #261303;
-                        }
                     }
-                    >.cstm-icon{
-                        font-size:2.5rem;
+                    >.cstm-editlink{
+                        font-size:2.8rem;
                         color: #a97103;
-        
+                        cursor: pointer;
+                        &:hover{
+                            color: #bb2623;
+                        }
                     }
                 }
             }
+            >.cstm-meet-mn-jb{
+                display: flex;
+                justify-content: space-between;
+                margin: 0 3rem;
+                align-items: center;
+                >.cstm-link{
+                    font-size:1.6rem;
+                    font-weight: bold;
+                    font-family: roboto;
+                    letter-spacing:0.5px;
+                    color: #056689;
+                    &:hover{
+                        color: #261303;
+                    }
+                }
+                >.cstm-icon{
+                    font-size:2.5rem;
+                    color: #a97103;
+        
+                }
+            }
         }
-    
+
+        .cstm-bg-all{
+            margin:0rem 2rem;
+            margin-bottom: 2rem;
+            background-color:white;
+            border-radius: 1.5rem;
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
+            min-height: 15rem;
+            padding:2.4rem;
+        }
+    }
+
+
 `
