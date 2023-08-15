@@ -154,6 +154,7 @@ export default Ment_Rightinfo
 
 
 const Container = styled.div`
+
         @media (min-width: ${props => props.theme.isTab} ) and (max-width: ${props => props.theme.isLargeTab}){
             .cstm-layer-top{
                 
