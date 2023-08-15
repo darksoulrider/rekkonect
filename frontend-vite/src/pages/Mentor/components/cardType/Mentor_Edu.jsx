@@ -42,7 +42,7 @@ const Mentor_Edu = () => {
 
 export default Mentor_Edu;
 
-
+// data
 const Container = styled.div`
 
     @media (min-width: ${props => props.theme.isLargeTab} ) and (max-width: ${props => props.theme.isDesktop}){
