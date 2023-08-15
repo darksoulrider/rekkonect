@@ -112,23 +112,15 @@ const Container = styled.div`
             >div>.cstm-logo{
                 object-fit: contain;
                 -webkit-tap-highlight-color: transparent;   
-   
             }
         }
-
     }
-
-
+    
     @media (min-width: ${props => props.theme.isLargeTab}) and (max-width: ${props => props.theme.isDesktop}) {
         .cstm-nav-layer{
             display: flex;
             justify-content: space-between;
             align-items:center;
         }
-
-
-
     }
-
-
 `

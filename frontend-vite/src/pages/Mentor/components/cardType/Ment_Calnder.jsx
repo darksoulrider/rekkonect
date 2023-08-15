@@ -18,40 +18,5 @@ const Ment_Calnder = () => {
 export default Ment_Calnder;
 
 const Wrapper = styled.div`
-     @media (min-width: ${props => props.theme.isLargeTab} ) and (max-width: ${props => props.theme.isDesktop}){
-        .cstm-layer{
-            margin-right:6rem;
-            margin-bottom: 2rem;
-            background-color:white;
-            border-radius: 1.5rem;
-            width:45rem;
-            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
-            min-height: 15rem;
-            padding:2.4rem;
-            >hr{
-                /* style={{ borderTop: '1px solid black', margin: '10px 0' }} */
-                border-top: 1px solid black;
-                margin-top: 1rem;
-                
-            }
-            .cstm-top{
-                display: flex;
-                justify-content: space-between;
-                height:2rem;
-                width: 100%;
-                /* border: 1px solid blue; */
-                align-items: center;
-                >p{
-                    font-size:2rem;
-                    font-weight:bold;
-                    color:green;
-                }
-                >.cstm-icon{
-                    font-size:2.4rem;
-                }
-                
-            }
-        }
-     }
 
 `
