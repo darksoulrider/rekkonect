@@ -254,7 +254,7 @@ const Container = styled.div`
         
         background-color:white;
         border-radius: 1.5rem;
-        margin-right:3.1rem;
+        margin:2rem 4rem;
         filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
         min-height: 15rem;
         padding:2.4rem;
@@ -294,20 +294,71 @@ const Container = styled.div`
             flex-wrap: wrap;
             justify-content: space-between;
             
-            
             >div{
-                /* flex-basis: 50%; */
+                flex-basis: 40%;
+                margin-bottom:1rem;
                 >p{
                     font-size:1.4rem;
                     color: #ff6400;
                     font-weight: bold;
+                    margin-bottom:0.4rem;
                 }
                 >span{
-                    font-size:1.4rem;
+                    font-size:1.6rem;
                 }
             }
         }
     }
+    .cstm-popup{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index:10;
+            backdrop-filter: blur(2px); 
+            >.cstm-popup-edit{
+                background-color: #fff;
+                padding: 1rem 3rem;
+                z-index: 2000;
+                border-radius:1rem;
+                >div>.cstm-close{
+                    color:red;
+                    font-size:3.3rem;
+                    cursor: pointer;
+                    margin:1rem 0rem;
+                    &:hover{
+                        color: #2a1203;
+                    }
+                }
+                .cstm-form-content{
+                    input{
+                        height:3.9rem;
+                        width:26rem;
+                    }
+                    span{
+                        color:red;
+                        font-size:1.1rem;
+                        font-family: 'roboto';
+                        
+                    }
+                   
+                }
+                textarea{
+                    width:45rem;
+                    resize:none;
+                }
+                >div>span{
+                    color:red;
+                    font-size:1.1rem;
+                    font-family: 'roboto';
+                }
+            }
+        }
 
 
 `

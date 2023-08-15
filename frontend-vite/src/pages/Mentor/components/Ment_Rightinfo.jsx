@@ -153,4 +153,15 @@ const Ment_Rightinfo = () => {
 export default Ment_Rightinfo
 
 
-const Container = styled.div``
+const Container = styled.div`
+
+    .cstm-layer-top{
+        >.cstm-progress{
+            >div>p{
+                
+            }
+        }
+    }
+
+
+`
