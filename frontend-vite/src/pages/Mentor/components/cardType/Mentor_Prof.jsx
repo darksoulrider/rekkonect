@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 
 import { BiSolidEdit } from "react-icons/bi"
 import { AiFillCloseCircle } from "react-icons/ai"
-
+import { toast } from 'react-toastify';
 import Select from 'react-select'
 
 
@@ -12,6 +12,8 @@ import { states } from '../../../../utils/SearchArrayOption/States';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from 'react-hook-form'
 import { mentor_info } from '../../../../utils/YupValidation/mentor'
+
+
 // **************** Api Imports ************************
 import { useUpdateAddressAndNameMutation } from '../../../../redux/apicall/mentor/Dashboard';
 
@@ -54,19 +56,23 @@ const Mentor_Prof = () => {
             contact: info.contact,
             bio: info.bio,
         }
-        console.log(sendInfo);
-
-
-        // const data = await setInfo(sendInfo);
+        const data = await setInfo(sendInfo);
     }
 
 
     // ! if successfull or any then using useEffect we can turn it off
-    const sendClick = (data) => {
-        console.log(data);
-        alert(data.state);
-        SetisOpen(false)
-    }
+
+    useEffect(() => {
+        if (issetInfoError) {
+            toast.error(issetInfoError.error)
+        }
+        if (issetInfoSuccess) {
+            toast.success("successfully updated..")
+            SetisOpen(false);
+        }
+    }, [issetInfoError, issetInfoSuccess])
+
+
 
 
 
@@ -81,7 +87,8 @@ const Mentor_Prof = () => {
                     <p className=' font-sans  pb-10'>Cuber Security | c++ | python | Working in jungle</p>
 
                 </div>
-                <div className='cstm-details flex-wrap'>
+                <div className='cstm-details'>
+
                     <div>
                         <p>Email Address:</p>
                         <span>mack@gmail.com</span>
@@ -100,7 +107,6 @@ const Mentor_Prof = () => {
                     </div>
 
                 </div>
-
             </div>
 
             {
@@ -251,7 +257,74 @@ export default Mentor_Prof;
 
 
 const Container = styled.div`
-  
+            
+        .cstm-layer{
+            
+            background-color:white;
+            border-radius: 1.5rem;
+            margin: 2rem 4rem;
+            min-height: 15rem;
+            padding:2.4rem;
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
+
+
+
+            >.cstm-top{
+                padding-bottom:1rem;
+                display:flex;
+                justify-content: space-between;
+                align-items:center;
+
+                >p{
+                    font-size:2rem;
+                    font-weight: bold;
+                }
+             
+                >.cstm-edit{
+                    font-size:2.4rem;
+                    color:gray;
+                    cursor:pointer;
+                    &:hover{
+                        color: #ff6400;
+                    }
+                }
+
+            }
+
+            >.cstm-bio{
+                >p{
+                    font-size:1.5rem;
+                    font-weight:bold;
+                    color: #474747;
+                }
+            }
+
+            >.cstm-details {
+
+                display:flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                
+                >div{
+                    flex-basis:40%;
+                    margin-bottom:1rem;
+                    
+                }
+                >div>p{
+                    font-size:1.6rem;
+                    color: #ff6400;
+                    font-weight: bold;
+                    margin-bottom:0.4rem;
+                }
+                >div>span{
+                    font-size:1.6rem;
+                    font-weight: bold;
+                    color: #323131;
+                }
+            }
+        }
+
+
         .cstm-popup{
             position: fixed;
             top: 0;
@@ -265,11 +338,12 @@ const Container = styled.div`
             z-index:10;
             backdrop-filter: blur(2px); 
             >.cstm-popup-edit{
+
                 background-color: #fff;
-                padding: 1rem 3rem;
-                
+                padding: 1rem 3rem;                
                 z-index: 2000;
                 border-radius:1rem;
+
                 >div>.cstm-close{
                     color:red;
                     font-size:3.3rem;
@@ -285,13 +359,13 @@ const Container = styled.div`
                         height:3.9rem;
                         width:26rem;
                     }
+
                     span{
                         color:red;
                         font-size:1.1rem;
-                        font-family: 'roboto';
-                        
-                    }
-                   
+                        font-family: 'roboto';    
+                    }                   
+
                 }
                 textarea{
                     width:45rem;
@@ -306,57 +380,6 @@ const Container = styled.div`
             }
         }
 
-        .cstm-layer{
-            margin-left:6rem;
-            background-color:white;
-            border-radius: 1.5rem;
-            margin-right:3.1rem;
-            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.1));
-            min-height: 15rem;
-            padding:2.4rem;
-   
-            >.cstm-top{
-                padding-bottom:1rem;
-                display:flex;
-                justify-content: space-between;
-                align-items:center;
-                /* flex justify-between text-2xl font-bold */
-                >p{
-                    font-size:2rem;
-                    font-weight: bold;
-                }
-             
-                >.cstm-edit{
-                    font-size:2.4rem;
-                    color:gray;
-                    cursor:pointer;
-                    &:hover{
-                        color: #ff6400;
-                    }
-                }
-            }
-
-
-            >.cstm-details {
-                display:flex;
-                justify-content: space-between;
-                >div{
-                    flex-basis: 40%;
-                    margin-bottom:1rem;
-                    /* border: 1px solid blue; */
-                }
-                >div>p{
-                    font-size:1.6rem;
-                    color: #ff6400;
-                    font-weight: bold;
-                    margin-bottom:0.4rem;
-                }
-                >div>span{
-                    font-size:1.6rem;
-                }
-            }
-        }
-    
 
 
 `

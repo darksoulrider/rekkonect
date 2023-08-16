@@ -6,7 +6,7 @@ export const isAuthenticated = catchAsyncError(async (req, res, next) => {
   // token is for mentor session
   // for mentor mentor@mack.com
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM4YjI3YTJmOWM3ZjdjZWQxZmU2NmMiLCJ1c2VyVHlwZSI6Im1lbnRvciIsImVtYWlsIjoibWVudG9yQG1hY2suY29tIiwiaWF0IjoxNjkxNTYyOTMzLCJleHAiOjE2OTE5OTQ5MzN9.XahVJmJezIMXql3RlNu5ZI5qlHMHVzOFbHFdR0Y3OFU";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM4YjI3YTJmOWM3ZjdjZWQxZmU2NmMiLCJ1c2VyVHlwZSI6Im1lbnRvciIsImVtYWlsIjoibWVudG9yQG1hY2suY29tIiwiaWF0IjoxNjkyMTU3OTIzLCJleHAiOjE2OTI1ODk5MjN9.iIWVZOC0s-J0TtbbhESXQfLaJTVffTiagJ0-dxsDCCg";
 
   // for meenakshin inventiway
   // const token =

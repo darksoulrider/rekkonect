@@ -2,8 +2,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 
-export const userEmployerProfile = createApi({
-    reducerPath: 'userMentorDashboard',
+export const userMentor = createApi({
+    reducerPath: 'userMentor',
     baseQuery: fetchBaseQuery({
         baseUrl: "http://localhost:5000/api",
         credentials: "include",
@@ -30,5 +30,5 @@ export const userEmployerProfile = createApi({
 // auto-generated based on the defined endpoints
 export const {
     useUpdateAddressAndNameMutation,
-    
-} = userEmployerProfile;
+
+} = userMentor;

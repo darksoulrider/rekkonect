@@ -10,6 +10,9 @@ import storage from "redux-persist/lib/storage"
 
 import { userEmployerProfile } from "./apicall/employer/userProfile";
 import { Emp_JobAPI } from "./apicall/employer/Emp_JobAPI";
+import { userMentor } from "./apicall/mentor/Dashboard";
+
+
 import {
   persistReducer,
   FLUSH,
@@ -42,7 +45,8 @@ const Store = configureStore({
     helper: helperReducer,
     [Authentication.reducerPath]: Authentication.reducer,
     [userEmployerProfile.reducerPath]: userEmployerProfile.reducer,
-    [Emp_JobAPI.reducerPath]: Emp_JobAPI.reducer
+    [Emp_JobAPI.reducerPath]: Emp_JobAPI.reducer,
+    [userMentor.reducerPath]: userMentor.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -54,6 +58,7 @@ const Store = configureStore({
         userEmployerProfile.middleware,
         Authentication.middleware,
         Emp_JobAPI.middleware,
+        userMentor.middleware,
       ]),
 });
 

@@ -19,7 +19,6 @@ export default Ment_Calnder;
 
 const Wrapper = styled.div`
     .cstm-layer{
-        
         background-color:white;
         border-radius: 1.5rem;
         margin:0rem 2rem;

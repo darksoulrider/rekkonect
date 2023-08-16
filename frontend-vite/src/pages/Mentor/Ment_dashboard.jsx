@@ -7,7 +7,7 @@ import Ment_Leftinfo from './components/Ment_Leftinfo';
 import Ment_Rightinfo from './components/Ment_Rightinfo';
 import banner from '/assets/images/carear-choice_img.png';
 import { styled } from 'styled-components';
-
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -48,6 +48,7 @@ const Mentordashboard = () => {
       <div>
         <Ment_Footer />
       </div>
+      <ToastContainer />
     </Container>
   )
 }

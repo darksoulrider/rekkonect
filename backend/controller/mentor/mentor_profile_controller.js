@@ -12,12 +12,13 @@ import { isValidTime, isValidDate } from "../../utils/helper/helper.js";
 export const updateAddress = catchAsyncError(async (req, res, next) => {
   let { user, id, userType, email } = req;
   const data = req.body;
-
+  console.log(data);
   user.firstName = data.firstName;
   user.lastName = data.lastName;
-  user.address.state = data.address.state;
-  user.address.pinCode = data.address.pinCode;
+  user.address.state = data.state;
+  user.address.pinCode = data.pincode;
   user.bio = data.bio;
+
   await user.validate();
   user = await user.save();
 
