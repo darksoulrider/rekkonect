@@ -14,19 +14,10 @@ const sendVerifyEmail = async (email_2) => {
     service: "gmail",
     //  make it from rekonnect auths [ email and pass ]
     auth: {
-      // user: "mukesh.inventiway@gmail.com",
-      // pass: "Snqgotlahnjnpbnz",
-      user: "reachus@rekonnect.in",
-      pass: "tklvafqcnxagevip",
+      
     },
 
-    // reachus@rekonnect.in
-    // tklvafqcnxagevip
 
-    // auth: {
-    //   user: "operations@rekonnect.in",
-    //   pass: "jkvepelhmyjiiool",
-    // },
   });
 
   try {
