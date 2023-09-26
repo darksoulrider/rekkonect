@@ -55,16 +55,11 @@ const main_2 = async () => {
   let transport = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      // user: "mukesh.inventiway@gmail.com",
-      // pass: "Snqgotlahnjnpbnz",
-      // user: "reachus@rekonnect.in",
-      // pass: "tklvafqcnxagevip",
-      user: "operations@rekonnect.in",
-      pass: "jkvepelhmyjiiool",
+
     },
     // auth: {
-    //   user: "operations@rekonnect.in",
-    //   pass: "jkvepelhmyjiiool",
+    //   user: 
+    //   pass: 
     // },
   });
   await sendVerifyEmail("agilemack@gmail.com", transport);
