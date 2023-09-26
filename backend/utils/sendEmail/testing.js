@@ -29,9 +29,9 @@ const main = () => {
   //     port: 587,
   //     secure: false,
   //     auth: {
-  //       user: "mukesh.inventiway@gmail.com",
-  //       pass: "nkdgmzhoytybkfhz", // testing another pass
-  //       //   pass: "Snqgotlahnjnpbnz",
+  //       user: "",
+  //       pass: "", // testing another pass
+  //       //   pass: "",
   //     },
   //   });
 
@@ -40,8 +40,8 @@ const main = () => {
     port: 587,
     secure: false,
     auth: {
-      user: "reachus@rekonnect.in",
-      pass: "glhfbcqbcmfymefx",
+      user: "",
+      pass: "",
     },
   });
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
